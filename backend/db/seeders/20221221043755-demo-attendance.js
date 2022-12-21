@@ -33,5 +33,6 @@ module.exports = {
   //   return queryInterface.bulkDelete(options, {
   //     eventId: { [Op.in]: [1, 2, 3] }
   //   }, {});
+  return  queryInterface.bulkDelete(options)
   }
 };

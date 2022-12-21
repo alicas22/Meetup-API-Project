@@ -3,7 +3,8 @@ const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Group } = require('../../db/models');
+const { User, Group, GroupImage, Venue, Membership } = require('../../db/models');
+const membership = require('../../db/models/membership');
 
 const router = express.Router();
 
@@ -39,7 +40,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
     const { user } = req;
     const id = user.id
 
-    const groups = await Group.findAll({ where: { organizerId: id } })
+    // const numMembers = await Membership.count({where:{groupId:}})
+
+    const groups = await Group.findAll({
+        where: { organizerId: id }
+    })
 
     res.json(groups)
 })
@@ -48,7 +53,19 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.get('/:groupId', requireAuth, async (req, res, next) => {
     const { groupId } = req.params
 
-    const group = Group.findByPk(groupId)
+    const group = await Group.findByPk(groupId,{
+        include:[
+            {
+                model: GroupImage
+            },
+            {
+                model: User, as: "Organizer"
+            },
+            {
+                model: Venue
+            }
+        ]
+    })
     res.json(group)
 })
 
