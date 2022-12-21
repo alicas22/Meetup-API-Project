@@ -11,22 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Group.hasMany(models.Event,{
-      //   foreignKey:'groupId'
-      // })
-      // Group.hasMany(models.Venue,{
-      //   foreignKey:'groupId'
-      // })
-      // Group.hasMany(models.GroupImage,{
-      //   foreignKey:'groupId'
-      // })
-      // Group.hasMany(models.Membership,{
-      //   foreignKey:'groupId'
-      // })
-      // Group.belongsTo(models.User,{
-      //   foreignKey:'organizerId'
-      // })
+      Group.hasMany(models.Event,{
+        foreignKey:'groupId'
+      })
+      Group.hasMany(models.Venue,{
+        foreignKey:'groupId'
+      })
+      Group.hasMany(models.GroupImage,{
+        foreignKey:'groupId'
+      })
+      Group.hasMany(models.Membership,{
+        foreignKey:'groupId'
+      })
+      Group.belongsTo(models.User,{
+        foreignKey:'organizerId', as:'GroupUsers'
+      })
       // Group.belongsToMany(models.Attendance,{
+      //   through: models.User,
+      //   foreignKey:'organizerId',
+      //   otherKey: 'userId'
+      // })
+      // Group.belongsToMany(models.Membership,{
       //   through: models.User,
       //   foreignKey:'organizerId',
       //   otherKey: 'userId'
@@ -39,21 +44,30 @@ module.exports = (sequelize, DataTypes) => {
       allowNull:false
     },
     name: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING(60),
+      validate:{
+        len: [1,60]
+      }
     },
     about: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      validate:{
+        len: [50,10000]
+      }
     },
-    // type: {
-    //   type: DataTypes.ENUM
-    // },
+    type: {
+      type: DataTypes.ENUM('Online', 'In person')
+    },
     private: {
-      type: DataTypes.BOOLEAN},
+      type: DataTypes.BOOLEAN
+    },
     city: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     state: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     createdAt: {
       type: DataTypes.DATE

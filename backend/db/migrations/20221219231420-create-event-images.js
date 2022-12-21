@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Attendances', {
+    await queryInterface.createTable('EventImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,14 +14,12 @@ module.exports = {
         references: { model: 'Events' },
         allowNull:false
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: { model: 'Users' },
-        allowNull:false
+      url: {
+        type: Sequelize.STRING
       },
-      // status: {
-      //   type: Sequelize.ENUM
-      // },
+      preview: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         type: Sequelize.DATE
       },
@@ -41,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Attendances');
+    await queryInterface.dropTable('EventImages');
   }
 };

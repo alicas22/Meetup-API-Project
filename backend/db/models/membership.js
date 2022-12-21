@@ -11,22 +11,32 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Membership.belongsTo(models.User,{
-      //   foreignKey:"userId"
+      Membership.belongsTo(models.User, {
+        foreignKey: "userId"
+      })
+      Membership.belongsTo(models.Group, {
+        foreignKey: "groupId"
+      })
+      // Membership.belongsToMany(models.Attendance,{
+      //   through: models.User,
+      //   foreignKey:'userId',
+      //   otherKey: 'userId'
       // })
-      // Membership.belongsTo(models.Group,{
-      //   foreignKey:"groupId"
+      // Membership.belongsToMany(models.Group,{
+      //   through: models.User,
+      //   foreignKey:'userId',
+      //   otherKey: 'organizerId'
       // })
     }
   }
   Membership.init({
     userId: {
       type: DataTypes.INTEGER,
-      allowNull:false
+      allowNull: false
     },
     groupId: {
       type: DataTypes.INTEGER,
-      allowNull:false
+      allowNull: false
     },
     // status: {
     //   type: DataTypes.ENUM
