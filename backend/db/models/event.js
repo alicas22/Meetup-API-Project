@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
   Event.init({
     venueId: {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull:true,
+      onDelete: 'CASCADE'
     },
     groupId: {
       type:DataTypes.INTEGER,
@@ -55,14 +56,14 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT
     },
-    // type: {
-    //   type: DataTypes.ENUM
-    // },
+    type: {
+      type: DataTypes.ENUM("Online", "In person")
+    },
     capacity: {
       type:DataTypes.INTEGER
     },
     price: {
-      type:DataTypes.INTEGER
+      type:DataTypes.DECIMAL(10,2)
     },
     startDate: {
       type: DataTypes.DATE
@@ -71,10 +72,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     },
     createdAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     updatedAt: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     }
   }, {
     sequelize,
