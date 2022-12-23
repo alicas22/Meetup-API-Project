@@ -11,20 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Group.hasMany(models.Event,{
-        foreignKey:'groupId'
+      Group.hasMany(models.Event, {
+        foreignKey: 'groupId',
+        onDelete: "CASCADE", hooks: true
       })
-      Group.hasMany(models.Venue,{
-        foreignKey:'groupId'
+      Group.hasMany(models.Venue, {
+        foreignKey: 'groupId',
+        onDelete: "CASCADE", hooks: true
       })
-      Group.hasMany(models.GroupImage,{
-        foreignKey:'groupId'
+      Group.hasMany(models.GroupImage, {
+        foreignKey: 'groupId',
+        onDelete: "CASCADE", hooks: true
       })
-      Group.hasMany(models.Membership,{
-        foreignKey:'groupId'
+      Group.hasMany(models.Membership, {
+        foreignKey: 'groupId',
+        onDelete: "CASCADE", hooks: true
       })
-      Group.belongsTo(models.User,{
-        foreignKey:'organizerId', as:'Organizer'
+      Group.belongsTo(models.User, {
+        foreignKey: 'organizerId'
       })
       // Group.belongsToMany(models.Attendance,{
       //   through: models.User,
@@ -40,19 +44,19 @@ module.exports = (sequelize, DataTypes) => {
   }
   Group.init({
     organizerId: {
-      type:DataTypes.INTEGER,
-      allowNull:false
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     name: {
       type: DataTypes.STRING(60),
-      validate:{
-        len: [1,60]
+      validate: {
+        len: [1, 60]
       }
     },
     about: {
       type: DataTypes.TEXT,
-      validate:{
-        len: [50,10000]
+      validate: {
+        len: [50, 10000]
       }
     },
     type: {

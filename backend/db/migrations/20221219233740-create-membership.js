@@ -20,7 +20,8 @@ module.exports = {
       groupId: {
         type: Sequelize.INTEGER,
         references: { model: 'Groups' },
-        allowNull:false
+        allowNull:false,
+        
       },
       status: {
         type: Sequelize.ENUM('co-host', 'member', 'pending'),

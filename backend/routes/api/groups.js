@@ -72,6 +72,27 @@ const validateEvent = [
     handleValidationErrors
 ];
 
+const validateVenue = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 10 })
+        .withMessage('Street address is required'),
+    check('city')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage("City is required"),
+    check('state')
+        .exists({ checkFalsy: true })
+        .isLength({min:2, max:2})
+        .withMessage("State is required"),
+    check('lat')
+        .isFloat({min:-90, max:90})
+        .withMessage("Latitude is not valid"),
+    check('lng')
+        .isFloat({min:-180, max:180})
+        .withMessage("Longitude is not valid"),
+    handleValidationErrors
+];
 const err = {}
 
 
@@ -144,6 +165,42 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 
 
 
+router.post('/:groupId/venues', requireAuth, validateVenue, async (req, res, next) => {
+    const { groupId } = req.params;
+    const { user } = req
+    const {address, city, state, lat, lng} = req.body
+    const group = await Group.findByPk(groupId)
+    const isCohost = await Membership.findOne({ where: { groupId, userId: user.id, status: "co-host" } })
+    const venue = await Venue.findOne({where: {groupId}})
+
+    if (group) {
+        if(isCohost || group.organizerId === user.id){
+            const newVenue = await Venue.create({
+                groupId: group.id, address, city, state, lat, lng
+            })
+            return res.json({
+                id:newVenue.id,
+                groupId: group.id,
+                address,
+                city,
+                state,
+                lat,
+                lng
+            })
+        } else{
+            err.title = "Not Authorized"
+            err.status = 403
+            err.message = "Only the organizer or co-host may create a venue"
+            return next(err)
+        }
+    }else {
+        err.title = "Can't find Group"
+        err.status = 404
+        err.message = `Group couldn't be found`
+        return next(err)
+    }
+
+})
 
 
 router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
@@ -179,14 +236,14 @@ router.post('/:groupId/membership', requireAuth, async (req, res, next) => {
 
 })
 
-router.delete('/:groupId/membership', requireAuth, async(req,res,next)=>{
+router.delete('/:groupId/membership', requireAuth, async (req, res, next) => {
     const { groupId } = req.params
     const { user } = req
-    const {memberId} = req.body
+    const { memberId } = req.body
     const group = await Group.findByPk(groupId)
 
     if (group) {
-        const isOrganizer = await Group.findOne({ where: { id:groupId, organizerId: user.id } })
+        const isOrganizer = await Group.findOne({ where: { id: groupId, organizerId: user.id } })
         const isCohost = await Membership.findOne({ where: { groupId: groupId, status: 'co-host' } })
         const membership = await Membership.findOne({ where: { groupId, userId: memberId } })
 
@@ -303,7 +360,7 @@ router.get('/:groupId/events', async (req, res, next) => {
     const allEvents = []
 
     const events = await Event.findAll({
-        attributes: {exclude: ['capacity', 'price', 'updatedAt', 'createdAt', 'description']},
+        attributes: { exclude: ['capacity', 'price', 'updatedAt', 'createdAt', 'description'] },
         where: { groupId },
         include: [{
             model: Group,
@@ -524,7 +581,7 @@ router.delete('/:groupId', requireAuth, async (req, res, next) => {
         await group.destroy()
         res.status(200)
         return res.json({
-            message: 'Successfully deleted',
+            message: "Successfully deleted",
             statusCode: 200
         })
     } else {
@@ -532,11 +589,7 @@ router.delete('/:groupId', requireAuth, async (req, res, next) => {
         err.status = 404
         err.message = `Group couldn't be found`
         return next(err)
-        // res.status(404)
-        // res.json({
-        //     message: "Group couldn't be found",
-        //     statusCode: 404
-        // })
+
 
     }
 })

@@ -47,6 +47,34 @@ const validateEvent = [
     handleValidationErrors
 ];
 
+const validateQuery = [
+    check('page')
+        .optional()
+        .isInt({ min: 1, max: 10 })
+        .withMessage("Page must be greater than or equal to 1 and less than or equal to 10"),
+    check('size')
+        .optional()
+        .isInt({ min: 1, max: 20 })
+        .withMessage("Size must be greater than or equal to 1 and less than or equal to 20"),
+    check('name')
+        .optional()
+        .isAlphanumeric('en-US',{ignore:" "})
+        .withMessage("Name must be a string"),
+    check('type')
+        .optional()
+        .isIn(['Online', 'In person'])
+        .withMessage("Type must be 'Online' or 'In Person'"),
+    check('startDate')
+        .optional()
+        .custom(async value => {
+            const dateTime = new Date(value)
+
+            if (isNaN(dateTime.getTime())) return Promise.reject()
+        })
+        .withMessage("Start date must be a valid datetime"),
+    handleValidationErrors
+];
+
 const err = {}
 
 router.post('/:eventId/attendance', requireAuth, async (req, res, next) => {
@@ -192,7 +220,7 @@ router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     const { eventId } = req.params
     const { user } = req
-    const {memberId} = req.body
+    const { memberId } = req.body
     const event = await Event.findByPk(eventId)
 
     if (event) {
@@ -394,8 +422,20 @@ router.put('/:eventId', requireAuth, validateEvent, async (req, res, next) => {
 })
 
 //fix date
-router.get('/', async (req, res, next) => {
+router.get('/', validateQuery, async (req, res, next) => {
+    let { page, size, name, type, startDate } = req.query
     const allEvents = []
+
+    page = page ? +page : 1;
+    size = size ? +size : 20;
+    const pagination = {}
+    pagination.limit = size;
+    pagination.offset = ((page - 1) * size)
+
+    const where = {}
+    if(name) where.name = name;
+    if(type) where.type = type;
+    if(startDate)where.startDate = startDate
 
     const events = await Event.findAll({
         include: [{
@@ -406,7 +446,9 @@ router.get('/', async (req, res, next) => {
             model: Venue,
             attributes: ['id', 'city', 'state']
         }],
-        attributes: { exclude: ['createdAt', 'updatedAt', 'description', 'capacity', 'price'] }
+        attributes: { exclude: ['createdAt', 'updatedAt', 'description', 'capacity', 'price'] },
+        ...pagination,
+        where
     })
 
     //calculate numAttending and previewImage if available
