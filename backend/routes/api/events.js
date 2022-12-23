@@ -186,12 +186,7 @@ router.post('/:eventId/images', requireAuth, async (req, res, next) => {
 })
 
 
-// router.put('/:eventId/attendance', requireAuth, async (req, res, next)=>{
-//     const { eventId } = req.params;
-//     const { user } = req
-//     const event = await Event.findByPk(eventId)
 
-// })
 
 router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
