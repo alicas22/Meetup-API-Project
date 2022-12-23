@@ -15,7 +15,7 @@ module.exports = {
       venueId: {
         type: Sequelize.INTEGER,
         references: { model: 'Venues' },
-        allowNull:false
+        allowNull:true
       },
       groupId: {
         type: Sequelize.INTEGER,
