@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Groups' },
         allowNull:false,
-        onDelete: 'CASCADE'
+        
       },
       address: {
         type: Sequelize.STRING
