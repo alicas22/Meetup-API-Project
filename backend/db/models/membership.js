@@ -36,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     groupId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE'
     },
     status: {
       type: DataTypes.ENUM('co-host', 'member', 'pending')

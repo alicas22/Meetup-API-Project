@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   Venue.init({
     groupId: {
       type: DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
+      onDelete: "CASCADE"
     },
     address: {
       type: DataTypes.STRING

@@ -196,10 +196,10 @@ router.delete('/:groupId/membership', requireAuth, async(req,res,next)=>{
             err.message = "Membership does not exist for this User"
             return next(err)
         }
-        
+
         if (membership && (isCohost || isOrganizer || membership.userId === user.id)) {
             membership.destroy()
-            return res.json({ message: "Successfully deleted membership from event" })
+            return res.json({ message: "Successfully deleted membership from group" })
         } else if (membership && (!isCohost && !isOrganizer && membership.userId !== user.id)) {
             err.title = "Not Authorized"
             err.status = 403
@@ -303,6 +303,7 @@ router.get('/:groupId/events', async (req, res, next) => {
     const allEvents = []
 
     const events = await Event.findAll({
+        attributes: {exclude: ['capacity', 'price', 'updatedAt', 'createdAt', 'description']},
         where: { groupId },
         include: [{
             model: Group,
