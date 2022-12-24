@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         { foreignKey: 'eventId' });
 
       Attendance.belongsTo(models.User,
-        { foreignKey: 'userId', as:'UserAttendance' });
+        { foreignKey: 'userId' });
 
       // Attendance.belongsToMany(models.Membership,
       //   {
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     eventId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      
+
     },
     userId: {
       type: DataTypes.INTEGER,
