@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE", hooks: true
       })
       Group.belongsTo(models.User, {
-        foreignKey: 'organizerId'
+        foreignKey: 'organizerId', as: "Organizer"
       })
       // Group.belongsToMany(models.Attendance,{
       //   through: models.User,
