@@ -544,6 +544,7 @@ router.get('/:groupId', requireAuth, async (req, res, next) => {
         console.log(group)
         res.json({
             id: group.id,
+            organizerId: group.organizerId,
             name: group.name,
             about: group.about,
             type: group.type,

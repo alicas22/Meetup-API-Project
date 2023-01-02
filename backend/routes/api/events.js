@@ -220,13 +220,13 @@ router.delete('/:eventId/attendance', requireAuth, async (req, res, next) => {
 
     const { eventId } = req.params
     const { user } = req
-    const { memberId } = req.body
+    const { userId } = req.body
     const event = await Event.findByPk(eventId)
 
     if (event) {
         const isOrganizer = await Group.findOne({ where: { id: event.groupId, organizerId: user.id } })
         const isCohost = await Membership.findOne({ where: { groupId: event.groupId, status: 'co-host' } })
-        const attendance = await Attendance.findOne({ where: { eventId, userId: memberId } })
+        const attendance = await Attendance.findOne({ where: { eventId, userId } })
 
         if (!attendance) {
             err.title = "Can't find Attendance"
