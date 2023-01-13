@@ -371,7 +371,7 @@ router.get('/:groupId/events', async (req, res, next) => {
             attributes: ['id', 'city', 'state']
         }],
     })
-    console.log(events)
+
     if (events.length) {
         //calculate numAttending and previewImage if available
         for (let i = 0; i < events.length; i++) {
@@ -499,7 +499,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         }
     }
 
-    //calculate numMembers and preview images if available
+
     for (let i = 0; i < result.length; i++) {
         let group = result[i]
         const groupId = group.id
@@ -510,7 +510,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         if (previewImage) group.previewImage = previewImage.url
         else group.previewImage = "Preview not available"
         final.push(group)
-        // console.log(allGroups)
+
     }
 
 
@@ -541,7 +541,7 @@ router.get('/:groupId', requireAuth, async (req, res, next) => {
         const numMembers = await Membership.count({ where: { groupId } })
         group.toJSON()
         group.numMembers = numMembers
-        console.log(group)
+
         res.json({
             id: group.id,
             organizerId: group.organizerId,
@@ -645,10 +645,10 @@ router.get('/', async (req, res, next) => {
         if (previewImage) group.previewImage = previewImage.url
         else group.previewImage = "Preview not available"
         allGroups.push(group)
-        console.log(allGroups)
+        
     }
 
-    console.log(allGroups)
+
     res.json({ Groups: allGroups })
 })
 
