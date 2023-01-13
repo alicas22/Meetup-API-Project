@@ -21,7 +21,6 @@ const validateLogin = [
 router.get(
     '/',
     restoreUser,
-    requireAuth,
     (req, res) => {
       const { user } = req;
 
