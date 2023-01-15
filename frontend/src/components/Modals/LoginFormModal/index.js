@@ -1,12 +1,14 @@
 // frontend/src/components/LoginFormModal/index.js
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
+import * as sessionActions from "../../../store/session";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../../context/Modal";
 import "./LoginForm.css";
-import { Link } from "react-router-dom";
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
+import OpenLoginModal from "../OpenLoginModal";
+
+
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -46,9 +48,10 @@ function LoginFormModal() {
         <div className="login-form-signup">
           <span>
             Not a member yet?</span>
-            <OpenModalButton className = "login-form-signup-link"
+            <OpenLoginModal className = "login-form-signup-link"
             buttonText="Sign Up"
             modalComponent={<SignupFormModal />}
+
             />
         </div>
             <br />

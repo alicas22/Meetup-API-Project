@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import OpenModalMenuItem from './OpenModalMenuItem';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
+import { Link } from "react-router-dom";
+import './Navigation.css'
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -35,39 +36,39 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    history.push('/')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <div className="outer-button" onClick={openMenu}>
+      <button  className='profile-button'>
+        {user.firstName[0].toUpperCase()}
       </button>
+      {showMenu === false ? (
+          <i className="fa-solid fa-chevron-down"></i>
+        ) : (
+          <i className="fa-solid fa-chevron-up"></i>
+        )}
+        </div>
       <ul className={ulClassName} ref={ulRef}>
-        {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={logout}>Log Out</button>
+            <Link to="/profile" className="link" >
+              Your events
+            </Link>
+            <Link to="/profile" className="link" style = {{borderBottom:"1px solid #e6dede"}}>
+              Your groups
+            </Link>
+            <Link to="/profile" className="link">
+              Your profile
+            </Link>
+            <li onClick={logout} className = 'link'>
+              Log out
             </li>
           </>
-        ) : (
-          <>
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-          </>
-        )}
+
       </ul>
     </>
   );

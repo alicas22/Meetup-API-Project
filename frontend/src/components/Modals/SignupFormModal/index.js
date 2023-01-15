@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
-import * as sessionActions from "../../store/session";
+import { useModal } from "../../../context/Modal";
+import * as sessionActions from "../../../store/session";
 import './SignupForm.css';
 
 function SignupFormModal() {
@@ -38,7 +38,7 @@ function SignupFormModal() {
         />
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit} className= 'signup-form'>
-        <ul>
+        <ul className="validation-errors">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>

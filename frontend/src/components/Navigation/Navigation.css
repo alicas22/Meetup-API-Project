@@ -1,46 +1,88 @@
-.hidden{
-    display: none;
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+
+.profile-dropdown{
+    position: absolute;
+    inset: 3.5rem 1rem auto auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 0.25rem;
+    z-index: 52;
+    list-style: none;
+    width: 190px;
+    background: #ffffff;
+    display:flex;
+    flex-direction:column;
+}
+.profile-button {
+    cursor: pointer;
+    height: 50px;
+    border-radius: 50%;
+    width: 50px;
+    background-color: orange;
+    font-weight: 500;
+    color: rgb(17, 15, 15);
+    font-family: inherit;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+
+
+.home-button {
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bold;
+    font-size:x-large;
+    color: red;
+    margin-left: 15px;
+
 }
 
-.header-container{
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 15px;
     min-height: 64px;
+    border-bottom: 1px solid #e6dede;
 }
 
 
-.button-container{
+.button-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-
+    justify-content: center;
+    margin-right:15px;
+    align-items: center;
 }
-
-.login-modal{
-
+.demo-login{
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    fill: #fff;
+    background-color: #f65858;
+    border: solid #f65858;
+    padding: 8px 12px;
+    font-weight: bold;
+}
+.modals {
     background: none;
     border: none;
+    font-size: .9em;
+    font-weight: bold;
     color: #212121;
     cursor: pointer;
-    font-size: .875rem;
-    font-weight: 500;
-    letter-spacing: 0;
     line-height: 20px;
     margin-left: 20px;
-    text-decoration: none;
 }
 
-.signup-modal{
-    background: none;
-    border: none;
-    color: #212121;
-    cursor: pointer;
-    font-size: .875rem;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 20px;
-    margin-left: 20px;
+.link {
     text-decoration: none;
+    cursor: pointer;
+    color: rgb(119, 119, 119);
+    padding:5px
+}
+
+.hidden {
+    display: none;
 }
