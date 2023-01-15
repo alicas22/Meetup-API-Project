@@ -26,7 +26,7 @@ function SignupFormModal() {
             city,
             state
         }
-        console.log(typeof Boolean(payload.privated))
+        
         return dispatch(createGroup(payload))
             .then(closeModal)
             .catch(async (res) => {
