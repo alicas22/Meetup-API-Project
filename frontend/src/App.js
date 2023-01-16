@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage"
 import Groups from './components/Groups'
+import EventsGroupsNav from "./components/EventsGroupsNav";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,8 +19,11 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path='/'>
+            <SplashPage />
+          </Route>
           <Route path='/groups'>
-            <Groups />
+            <EventsGroupsNav />
           </Route>
         </Switch>
       )}

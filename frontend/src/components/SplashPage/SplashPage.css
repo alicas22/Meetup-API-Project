@@ -1,0 +1,36 @@
+/* .splash-page-container{
+display:flex;
+flex-direction: column;
+justify-content:center;
+align-items: center;
+}*/
+
+.splash-page-header-container{
+    display: flex;
+    flex-direction: row;
+    margin-top:8rem;
+    margin-left:16rem;
+    margin-right:16rem;
+
+    position: fixed;
+    max-width: max-content;
+}
+.text-container{
+    display: flex;
+    flex-direction: column;
+    width:50%;
+
+}
+
+.header-quote{
+    font-size: 3rem;
+    font-weight: 700;
+    /* background-color: yellow; */
+    line-height: 48px;
+
+}
+ .splash-page-image{
+    width:50%;
+    position:relative;
+    margin-left:3rem;
+}

@@ -10,8 +10,7 @@ const Groups = () => {
 const dispatch = useDispatch()
 const groupsObj = useSelector(state=> state.groups)
 const groups = Object.values(groupsObj)
-console.log('groupsObj: ', groupsObj)
-console.log('groupArr: ', groups)
+
 
 useEffect(() => {
   dispatch(getGroups())
