@@ -28,6 +28,7 @@ h1 {
     padding-bottom: 8px;
     padding-top: 12px;
     width: 15%;
+    margin-top: 1rem;
 }
 
 .login-form-signup {
@@ -56,6 +57,7 @@ h1 {
     font-weight: 600;
     height: 3rem;
     margin-top: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 label {

@@ -4,6 +4,7 @@ const LOAD_EVENTS = "events/LOAD_EVENTS";
 const ADD_EVENT = "events/ADD_EVENT";
 const UPDATE_EVENT = "events/UPDATE_EVENT";
 const DELETE_EVENT = "events/DELETE_EVENT";
+const ADD_EVENT_IMAGE = "events/ADD_EVENT_IMAGE";
 
 
 export const loadEvents = (events) => {
@@ -37,6 +38,27 @@ export const remove = (eventId) => {
   };
 };
 
+export const addEventImage = (image) =>{
+  return {
+    type: ADD_EVENT_IMAGE,
+    payload: image
+  }
+}
+//thunks
+export const addEventImageThunk = (image, eventId) => async(dispatch) =>{
+  const response = await csrfFetch(`/api/events/${eventId}/images`,{
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(image),
+  })
+  if (response.ok){
+    const data = await response.json();
+    dispatch(addEventImage(data))
+    return data;
+  }
+}
 
 export const getEvents = () => async (dispatch) => {
   const response = await csrfFetch("/api/events");

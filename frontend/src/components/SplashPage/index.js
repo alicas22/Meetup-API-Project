@@ -12,6 +12,9 @@ function SplashPage() {
 
     return (
         <>
+                <img src ="https://secure.meetupstatic.com/next/images/blobs/red-blob.svg" alt = 'light-red-blob' id="light-red-blob"/>
+                <img src ="https://secure.meetupstatic.com/next/images/blobs/yellow-blob.svg" alt = 'light-yellow-blob' id="light-yellow-blob"/>
+                <img src ="https://secure.meetupstatic.com/next/images/blobs/green-blob.svg" alt = 'light-green-blob' id="light-green-blob"/>
             <div className='splash-page-container'>
                 <div className='splash-page-header-container'>
                     <div className='text-container'>

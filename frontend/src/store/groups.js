@@ -4,6 +4,7 @@ const LOAD_GROUPS = "groups/LOAD_GROUPS";
 const ADD_GROUP = "groups/ADD_GROUP";
 const UPDATE_GROUP = "groups/UPDATE_GROUP";
 const DELETE_GROUP = "groups/DELETE_GROUP";
+const ADD_GROUP_IMAGE = "groups/ADD_GROUP_IMAGE";
 
 
 export const loadGroups = (groups) => {
@@ -37,6 +38,29 @@ export const removeGroup = (groupId) => {
   };
 };
 
+export const addGroupImage = (image) =>{
+  return {
+    type: ADD_GROUP_IMAGE,
+    payload: image
+  }
+}
+
+//thunks
+export const addGroupImageThunk = (image, groupId) => async(dispatch) =>{
+  const response = await csrfFetch(`/api/groups/${groupId}/images`,{
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(image),
+  })
+
+  if (response.ok){
+    const data = await response.json();
+    dispatch(addGroupImage(data))
+    return data;
+  }
+}
 
 export const getGroups = () => async (dispatch) => {
   const response = await csrfFetch("/api/groups");
