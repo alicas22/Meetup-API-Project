@@ -25,7 +25,8 @@ useEffect(() => {
                 <li key = {event.id}>{event.name}</li>
             ))}
         </ul>
-        <div className='modals'>
+        NEED TO MOVE THIS TO GROUPDETAILS PAGE
+         <div className='modals'>
           <OpenModalButton
             buttonText="Create Event"
             modalComponent={<CreateEventModal />}
