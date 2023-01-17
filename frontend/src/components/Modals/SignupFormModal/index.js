@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useModal } from "../../context/Modal";
-import * as sessionActions from "../../store/session";
-// import './SignupForm.css';
+import { useModal } from "../../../context/Modal";
+import * as sessionActions from "../../../store/session";
+import './SignupForm.css';
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -30,10 +30,15 @@ function SignupFormModal() {
   };
 
   return (
-    <>
+    <div className="signup-container">
+    <img
+          className="signin-form-icon"
+          src="https://resource.logitechg.com/w_659,c_limit,f_auto,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/og-fallback.jpg?v=1"
+          alt="logo"
+        />
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+      <form onSubmit={handleSubmit} className= 'signup-form'>
+        <ul className="validation-errors">
           {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <label>
@@ -90,9 +95,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-form-button">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 

@@ -22,7 +22,9 @@ const validateCreation = [
         .isIn(['Online', 'In person'])
         .withMessage(`Type must be 'Online' or 'In person'`),
     check('private')
-        .isBoolean()
+        .custom(async value => {
+            if(typeof Boolean(value) !== "boolean") return Promise.reject()
+        })
         .withMessage('Private must be a boolean'),
     check('city')
         .isLength({ min: 2 })
@@ -83,13 +85,13 @@ const validateVenue = [
         .withMessage("City is required"),
     check('state')
         .exists({ checkFalsy: true })
-        .isLength({min:2, max:2})
+        .isLength({ min: 2, max: 2 })
         .withMessage("State is required"),
     check('lat')
-        .isFloat({min:-90, max:90})
+        .isFloat({ min: -90, max: 90 })
         .withMessage("Latitude is not valid"),
     check('lng')
-        .isFloat({min:-180, max:180})
+        .isFloat({ min: -180, max: 180 })
         .withMessage("Longitude is not valid"),
     handleValidationErrors
 ];
@@ -168,18 +170,18 @@ router.put('/:groupId/membership', requireAuth, async (req, res, next) => {
 router.post('/:groupId/venues', requireAuth, validateVenue, async (req, res, next) => {
     const { groupId } = req.params;
     const { user } = req
-    const {address, city, state, lat, lng} = req.body
+    const { address, city, state, lat, lng } = req.body
     const group = await Group.findByPk(groupId)
     const isCohost = await Membership.findOne({ where: { groupId, userId: user.id, status: "co-host" } })
-    const venue = await Venue.findOne({where: {groupId}})
+    const venue = await Venue.findOne({ where: { groupId } })
 
     if (group) {
-        if(isCohost || group.organizerId === user.id){
+        if (isCohost || group.organizerId === user.id) {
             const newVenue = await Venue.create({
                 groupId: group.id, address, city, state, lat, lng
             })
             return res.json({
-                id:newVenue.id,
+                id: newVenue.id,
                 groupId: group.id,
                 address,
                 city,
@@ -187,13 +189,13 @@ router.post('/:groupId/venues', requireAuth, validateVenue, async (req, res, nex
                 lat,
                 lng
             })
-        } else{
+        } else {
             err.title = "Not Authorized"
             err.status = 403
             err.message = "Only the organizer or co-host may create a venue"
             return next(err)
         }
-    }else {
+    } else {
         err.title = "Can't find Group"
         err.status = 404
         err.message = `Group couldn't be found`
@@ -645,7 +647,7 @@ router.get('/', async (req, res, next) => {
         if (previewImage) group.previewImage = previewImage.url
         else group.previewImage = "Preview not available"
         allGroups.push(group)
-        
+
     }
 
 
@@ -657,7 +659,6 @@ router.post('/', requireAuth, validateCreation, async (req, res, next) => {
     const { name, about, type, private, city, state } = req.body
     const { user } = req;
     const id = user.id
-
     const group = await Group.create({
         organizerId: id, name, about, type, private, city, state
     })
