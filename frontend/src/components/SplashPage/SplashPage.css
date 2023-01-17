@@ -46,6 +46,7 @@
     justify-content: space-between;
     color: #008294;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .splash-page-link-container>div >span >i{

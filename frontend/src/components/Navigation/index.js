@@ -56,7 +56,7 @@ function Navigation({ isLoaded }) {
   return (
     <div className='header-container'>
       <div className='home-button'>
-        <NavLink exact to="/" style={{textDecoration: 'none', color:'red'}}>GitTogether</NavLink>
+        <NavLink exact to="/" activeClassName="not-going-to-be-active" style={{textDecoration: 'none', color:'red'}}>GitTogether</NavLink>
       </div>
       <div className='login-signup'>
         {isLoaded && sessionLinks}

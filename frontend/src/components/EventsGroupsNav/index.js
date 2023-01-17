@@ -13,7 +13,7 @@ function EventsGroupsNav() {
             <span className="EventsGroupsNav-events">
                 <NavLink to='/events' activeClassName="active" style={{ textDecoration: 'none' }}>Events</NavLink>
             </span>
-            <span className="EventsGroupsNav-groups .selected">
+            <span className="EventsGroupsNav-groups">
                 <NavLink to='/groups' activeClassName="active" style={{ textDecoration: 'none' }}>Groups</NavLink>
             </span>
         </div>

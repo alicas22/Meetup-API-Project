@@ -10,8 +10,6 @@ const Events = () => {
 const dispatch = useDispatch()
 const eventsObj = useSelector(state=> state.events)
 const events = Object.values(eventsObj)
-// console.log('eventsObj: ', eventsObj)
-// console.log('eventsArr: ', events)
 
 useEffect(() => {
   dispatch(getEvents())
