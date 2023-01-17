@@ -1,20 +1,20 @@
 import Groups from "../Groups";
 import Events from "../Events"
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import './EventsGroupsNav.css'
 
 
-function EventsGroupsNav(){
+function EventsGroupsNav() {
 
 
-    return(
+
+    return (
         <div className="EventsGroupNav-container">
-            <span className="EventsGroupsNav-Events">
-            <Link to ='/events'>Events</Link>
-            <Events />
+            <span className="EventsGroupsNav-events">
+                <NavLink to='/events' activeClassName="active" style={{ textDecoration: 'none' }}>Events</NavLink>
             </span>
-            <span className="EventsGroupsNav-Groups">
-                <Link to ='/groups'>Groups</Link>
-                <Groups />
+            <span className="EventsGroupsNav-groups .selected">
+                <NavLink to='/groups' activeClassName="active" style={{ textDecoration: 'none' }}>Groups</NavLink>
             </span>
         </div>
     )
