@@ -1,0 +1,15 @@
+.group-details-container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.group-details-header{
+    display: flex;
+    direction:row;
+}
+
+.header-image{
+    max-width: 500px;
+    max-height: 500px;
+}

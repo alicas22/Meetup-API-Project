@@ -17,7 +17,7 @@ function SignupFormModal() {
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
     const { groupId } = useParams()
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -130,7 +130,7 @@ function SignupFormModal() {
                         type="url"
                         value={imageURL}
                         onChange={(e) => setImageURL(e.target.value)}
-                        required
+                        
                         placeholder="https://example.com"
                     />
                 </label>

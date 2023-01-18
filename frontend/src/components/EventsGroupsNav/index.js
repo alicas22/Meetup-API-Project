@@ -10,12 +10,12 @@ function EventsGroupsNav() {
 
     return (
         <div className="EventsGroupNav-container">
-            <span className="EventsGroupsNav-events">
-                <NavLink to='/events' activeClassName="active" style={{ textDecoration: 'none' }}>Events</NavLink>
-            </span>
-            <span className="EventsGroupsNav-groups">
-                <NavLink to='/groups' activeClassName="active" style={{ textDecoration: 'none' }}>Groups</NavLink>
-            </span>
+            <div className="EventsGroupsNav-events">
+                <NavLink to='/events' activeClassName="active" style={{ textDecoration: 'none'}} className="navlink-events">Events</NavLink>
+            </div>
+            <div className="EventsGroupsNav-groups">
+                <NavLink to='/groups' activeClassName="active" style={{ textDecoration: 'none' }} className= "navlink-groups">Groups</NavLink>
+            </div>
         </div>
     )
 }

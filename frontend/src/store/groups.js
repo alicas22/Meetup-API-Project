@@ -1,12 +1,15 @@
 import { csrfFetch } from "./csrf";
 
+//Actions
 const LOAD_GROUPS = "groups/LOAD_GROUPS";
 const ADD_GROUP = "groups/ADD_GROUP";
 const UPDATE_GROUP = "groups/UPDATE_GROUP";
 const DELETE_GROUP = "groups/DELETE_GROUP";
 const ADD_GROUP_IMAGE = "groups/ADD_GROUP_IMAGE";
+const GET_SINGLE_GROUP = "groups/GET_SINGLE_GROUP"
 
 
+//Action Creators
 export const loadGroups = (groups) => {
   return {
     type: LOAD_GROUPS,
@@ -38,16 +41,33 @@ export const removeGroup = (groupId) => {
   };
 };
 
-export const addGroupImage = (image) =>{
+export const addGroupImage = (image, groupId) => {
   return {
     type: ADD_GROUP_IMAGE,
-    payload: image
+    payload: { image, groupId }
+  }
+}
+
+export const getSingleGroup = (group) => {
+  return {
+    type: GET_SINGLE_GROUP,
+    payload: group
   }
 }
 
 //thunks
-export const addGroupImageThunk = (image, groupId) => async(dispatch) =>{
-  const response = await csrfFetch(`/api/groups/${groupId}/images`,{
+export const getSingleGroupThunk = (groupId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/groups/${groupId}`)
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getSingleGroup(data))
+    return data
+  }
+}
+
+export const addGroupImageThunk = (image, groupId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/groups/${groupId}/images`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
@@ -55,7 +75,7 @@ export const addGroupImageThunk = (image, groupId) => async(dispatch) =>{
     body: JSON.stringify(image),
   })
 
-  if (response.ok){
+  if (response.ok) {
     const data = await response.json();
     dispatch(addGroupImage(data))
     return data;
@@ -114,12 +134,15 @@ export const deleteGroup = (groupId) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(removeGroup(groupId));
+    dispatch(removeGroup(data));
     return data;
   }
 };
-
-const initialState = {};
+//initial store state
+const initialState = {
+  allGroups: {},
+  singleGroup: {},
+};
 
 export const groupsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -148,6 +171,20 @@ export const groupsReducer = (state = initialState, action) => {
     case DELETE_GROUP: {
       const newState = { ...state };
       delete newState[action.payload];
+      return newState;
+    }
+    case ADD_GROUP_IMAGE: {
+      const newState = { ...state };
+      newState[action.payload.groupId] = {
+        ...newState[action.payload.groupId],
+        previewImage: action.payload.image
+      }
+      return newState;
+    }
+
+    case GET_SINGLE_GROUP: {
+      const newState = { ...state };
+      newState.singleGroup = action.payload
       return newState;
     }
 
