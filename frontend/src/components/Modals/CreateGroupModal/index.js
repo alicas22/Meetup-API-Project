@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import './CreateGroup.css';
-import { createGroup } from "../../../store/groups";
+import { addGroupImageThunk, createGroup } from "../../../store/groups";
+import { useParams } from 'react-router-dom'
 
 function SignupFormModal() {
     const dispatch = useDispatch();
@@ -12,8 +13,11 @@ function SignupFormModal() {
     const [privated, setPrivated] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
+    const [imageURL, setImageURL] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+    const { groupId } = useParams()
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,17 +30,28 @@ function SignupFormModal() {
             city,
             state
         }
-        
-        return dispatch(createGroup(payload))
-            .then(closeModal)
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
+
+        if (imageURL) {
+            return dispatch(createGroup(payload))
+                .then(dispatch(addGroupImageThunk({ url: imageURL, preview: true }, groupId)))
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        } else {
+            return dispatch(createGroup(payload))
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
+
     };
 
     return (
-        <div className="create-group-container">
+        <div className="create-group-container ">
             <img
                 className="create-group-form-icon"
                 src="https://resource.logitechg.com/w_659,c_limit,f_auto,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/og-fallback.jpg?v=1"
@@ -107,6 +122,16 @@ function SignupFormModal() {
                         value={state}
                         onChange={(e) => setState(e.target.value)}
                         required
+                    />
+                </label>
+                <label>
+                    Image
+                    <input
+                        type="url"
+                        value={imageURL}
+                        onChange={(e) => setImageURL(e.target.value)}
+                        
+                        placeholder="https://example.com"
                     />
                 </label>
                 <button type="submit" className="create-group-form-button">Create Group</button>

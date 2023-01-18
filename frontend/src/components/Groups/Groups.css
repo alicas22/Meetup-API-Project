@@ -1,0 +1,62 @@
+.groups-preview-image {
+    height: 100px;
+    width: 175px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.groups-container {
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+    margin: auto
+}
+
+.groups-header {
+    border-bottom: 1px solid rgb(201, 200, 200);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    font-weight: 100;
+}
+
+.group-name {
+    line-height: 0;
+    color: black
+}
+
+.group-city-state {
+    color: #877457;
+    line-height: 0.5;
+    font-weight: 500;
+}
+
+.group-about,
+.group-number-members {
+    padding-top: 1rem;
+    color: #757575;
+    font-size: .9em
+}
+
+.single-group-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(201, 200, 200);
+}
+
+.single-group-text-container {
+    padding-left: 10px;
+}
+
+.group-about {
+    width: 500px;
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}

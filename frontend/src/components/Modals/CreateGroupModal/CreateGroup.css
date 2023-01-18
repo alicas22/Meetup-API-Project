@@ -2,12 +2,19 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 600px;
+    /* max-height: 100vh; */
+    max-height: 100vh;
+
+
+
 }
 
 .create-group-form {
     display: flex;
     flex-direction: column;
     width: 100%;
+
 }
 
 .create-group-form-icon {
@@ -18,6 +25,7 @@
     padding-bottom: 8px;
     padding-top: 12px;
     width: 15%;
+    margin-top: 1rem;
 }
 
 h1 {
@@ -77,4 +85,5 @@ textarea:hover {
     font-weight: 600;
     height: 3rem;
     margin-top: 1.5rem;
+    margin-bottom: 1rem;
 }

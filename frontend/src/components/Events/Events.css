@@ -1,0 +1,63 @@
+.events-preview-image {
+    height: 100px;
+    width: 175px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.events-container {
+    display: flex;
+    flex-direction: column;
+
+    width:70%;
+    margin:auto
+
+
+}
+
+.events-header {
+    border-bottom: 1px solid rgb(201, 200, 200);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    font-weight: 100;
+}
+.event-time{
+    color: #877457;
+    line-height: 0.5;
+    font-weight: 500;
+}
+
+.event-name{
+    line-height: 0;
+    color: black
+}
+
+.event-city-state,
+.event-attendees{
+    padding-top: 1rem;
+    color: #757575;
+    font-size: .9em
+}
+
+.single-event-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(201, 200, 200);
+}
+
+.single-event-text-container {
+    padding-left: 10px;
+}
+
+.event-about {
+    width: 500px;
+    line-height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}

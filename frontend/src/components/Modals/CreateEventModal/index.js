@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import './CreateEvent.css';
-import { createEvent } from "../../../store/events";
+import { addEventImageThunk, createEvent } from "../../../store/events";
+import { useParams } from 'react-router-dom'
 
 function CreateEventModal() {
     const dispatch = useDispatch();
@@ -14,8 +15,10 @@ function CreateEventModal() {
     const [description, setDescription] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [imageURL, setImageURL] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
+    const { eventId } = useParams()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,12 +34,23 @@ function CreateEventModal() {
             endDate
         }
 
+        if(imageURL){
         return dispatch(createEvent(payload))
+            .then(dispatch(addEventImageThunk({url:imageURL, preview:true}, eventId)))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
+        }else{
+            return dispatch(createEvent(payload))
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+
+        }
     };
 
     return (

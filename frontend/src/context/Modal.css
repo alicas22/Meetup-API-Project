@@ -1,12 +1,13 @@
 #modal {
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 3rem;
   right: 0;
   left: 0;
-  bottom: 0;
+  bottom: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 100%;
 
 }
 
@@ -30,6 +31,9 @@
   padding: 36px 40px 32px;
   position: absolute;
   text-align: center;
-  width: 27%;
+  width: 30%;
+  /* added myself */
+  
+  overflow-y: auto;
 
 }

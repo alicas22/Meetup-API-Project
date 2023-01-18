@@ -1,20 +1,28 @@
 
 
 .EventsGroupNav-container{
+    padding-top: 3rem;
     display: flex;
-    justify-content: start;
-    width: 70%;
-    /* line-height: 24px; */
-    margin-top: 2rem;
-    margin-left: 2rem
+    width:70%;
+    margin:auto
+
+
 }
 .EventsGroupsNav-groups,
 .EventsGroupsNav-events
 {
-    text-indent: 1rem;
+    color: white;
     text-decoration: none;
-    font-size: larger;
+    font-size: 1.3em;
     font-weight: bold;
+}
+.EventsGroupsNav-groups{
+    text-indent: 15px;
+}
+
+.navlink-events,
+.navlink-groups{
+    color:gray
 }
 
 
