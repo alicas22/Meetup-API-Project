@@ -2,7 +2,7 @@
     height: 100px;
     width: 175px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: .5rem;
 }
 
 .events-container {
@@ -51,13 +51,4 @@
 
 .single-event-text-container {
     padding-left: 10px;
-}
-
-.event-about {
-    width: 500px;
-    line-height: 1.5em;
-    height: 3em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
 }

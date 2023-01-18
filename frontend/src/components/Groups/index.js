@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getGroups } from '../../store/groups.js';
-import { useModal } from "../../context/Modal";
-import OpenModalButton from '../Modals/OpenModalButton';
-import CreateGroupModal from '../Modals/CreateGroupModal';
+
 import './Groups.css'
 
 const Groups = () => {
   const dispatch = useDispatch()
-  const groupsObj = useSelector(state => state.groups)
+  const groupsObj = useSelector(state => state.groups.allGroups)
   const groups = Object.values(groupsObj)
 
   groups.forEach((group) => {
@@ -20,14 +18,13 @@ const Groups = () => {
 
   useEffect(() => {
     dispatch(getGroups())
-  }, [])
+  }, [dispatch])
 
 
 
-  if (!groups) return null;
-  return (
+  if (groups.length === 0) return null;
+  return  (
     <div className='groups-container'>
-
       <h4 className='groups-header'>Find groups near you</h4>
       <div className='groups-list'>
         {groups.map((group) => (

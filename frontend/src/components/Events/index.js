@@ -10,10 +10,10 @@ import './Events.css'
 
 const Events = () => {
   const dispatch = useDispatch()
-  const eventsObj = useSelector(state => state.events)
-  const events = Object.values(eventsObj)
-  const groupsObj = useSelector(state => state.groups)
+  const groupsObj = useSelector(state => state.groups.allGroups)
   const groups = Object.values(groupsObj)
+  const eventsObj = useSelector(state => state.events.allEvents)
+  const events = Object.values(eventsObj)
 
   events.forEach((event) => {
     if (event.previewImage == "Preview not available" || event.previewImage == null) {
@@ -24,10 +24,13 @@ const Events = () => {
   useEffect(() => {
     dispatch(getEvents())
     dispatch(getGroups())
-  }, [])
+  },[dispatch])
 
-  if (!events) return null;
-  return (
+
+
+  if (!events.length|| !groups.length ||
+    events.length < 1 || groups.length < 1) return null;
+  return groups && events && (
     <div className='events-container'>
       <div className='modals'>
         MOVE TO GROUP DETAILS PAGE
@@ -46,7 +49,7 @@ const Events = () => {
                 <div class datetime={event.startDate} className="event-time">{event.startDate}</div>
                 <h2 className='event-name'>{event.name}  </h2>
                 <div className='event-city-state'>{groups[event.groupId].name} - {groups[event.groupId].city}, {groups[event.groupId].state}</div>
-                <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId].private ? 'Private' : "Public"}</div>
+                <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId].private ===true ? 'Private' : "Public"}</div>
               </div>
             </div>
           </Link>

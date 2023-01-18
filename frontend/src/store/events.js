@@ -144,36 +144,34 @@ const initialState = {
 export const eventsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_EVENTS: {
-      const allEvents = {};
+      const newState = {...state}
       action.payload.Events.forEach((event) => {
-        allEvents[event.id] = event;
+        newState.allEvents[event.id] = event;
       });
-      return {
-        ...allEvents,
-      };
+      return newState;
     }
 
     case ADD_EVENT: {
       const newState = { ...state };
-      newState[action.payload.id] = action.payload;
+      newState.allEvents[action.payload.id] = action.payload;
       return newState;
     }
 
     case UPDATE_EVENT: {
       const newState = { ...state };
-      newState[action.payload.id] = action.payload;
+      newState.allEvents[action.payload.id] = action.payload;
       return newState;
     }
 
     case DELETE_EVENT: {
       const newState = { ...state };
-      delete newState[action.payload];
+      delete newState.allEvents[action.payload];
       return newState;
     }
     case ADD_EVENT_IMAGE: {
       const newState = { ...state };
       newState[action.payload.eventId] ={
-        ...newState[action.payload.eventId],
+        ...newState.allEvents[action.payload.eventId],
       previewImage:action.payload.image}
       return newState;
     }

@@ -147,35 +147,33 @@ const initialState = {
 export const groupsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_GROUPS: {
-      const allGroups = {};
+      const newState = { allGroups:{}, singleGroup:{}}
       action.payload.Groups.forEach((group) => {
-        allGroups[group.id] = group;
+        newState.allGroups[group.id] = group;
       });
-      return {
-        ...allGroups,
-      };
+      return newState;
     }
 
     case ADD_GROUP: {
-      const newState = { ...state };
-      newState[action.payload.id] = action.payload;
+      const newState = { ...state, allGroups:{...state.allGroups} };
+      newState.allGroups[action.payload.id] = action.payload;
       return newState;
     }
 
     case UPDATE_GROUP: {
-      const newState = { ...state };
-      newState[action.payload.id] = action.payload;
+      const newState = { ...state, allGroups:{...state.allGroups} };
+      newState.allGroups[action.payload.id] = action.payload;
       return newState;
     }
 
     case DELETE_GROUP: {
-      const newState = { ...state };
-      delete newState[action.payload];
+      const newState = { ...state, allGroups:{...state.allGroups} };
+      delete newState.allGroups[action.payload];
       return newState;
     }
     case ADD_GROUP_IMAGE: {
-      const newState = { ...state };
-      newState[action.payload.groupId] = {
+      const newState = { ...state, allGroups:{...state.allGroups} };
+      newState.allGroups[action.payload.groupId] = {
         ...newState[action.payload.groupId],
         previewImage: action.payload.image
       }
@@ -183,7 +181,7 @@ export const groupsReducer = (state = initialState, action) => {
     }
 
     case GET_SINGLE_GROUP: {
-      const newState = { ...state };
+      const newState = { allGroups:{}, singleGroup:{} };
       newState.singleGroup = action.payload
       return newState;
     }

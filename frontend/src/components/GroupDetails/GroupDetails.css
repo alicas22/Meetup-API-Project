@@ -7,9 +7,21 @@
 .group-details-header{
     display: flex;
     direction:row;
+    width: 80%;
+    margin:auto
 }
 
 .header-image{
     max-width: 500px;
     max-height: 500px;
 }
+
+.group-details-header-image{
+    height: 350px;
+    width: 550px;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+ .group-details-info-container{
+    padding-left: 20px;
+ }

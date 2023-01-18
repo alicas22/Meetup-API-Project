@@ -55,7 +55,7 @@ function ProfileButton({ user }) {
         </div>
       <ul className={ulClassName} ref={ulRef}>
           <>
-            <Link to="/profile" className="link" >
+            {/* <Link to="/profile" className="link" >
               Your events
             </Link>
             <Link to="/profile" className="link" style = {{borderBottom:"1px solid #e6dede"}}>
@@ -63,7 +63,7 @@ function ProfileButton({ user }) {
             </Link>
             <Link to="/profile" className="link">
               Your profile
-            </Link>
+            </Link> */}
             <li onClick={logout} className = 'link'>
               Log out
             </li>
