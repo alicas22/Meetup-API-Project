@@ -27,12 +27,7 @@ const Groups = () => {
   if (!groups) return null;
   return (
     <div className='groups-container'>
-      <div className='modals'>
-        <OpenModalButton
-          buttonText="Create Group"
-          modalComponent={<CreateGroupModal />}
-        />
-      </div>
+
       <h4 className='groups-header'>Find groups near you</h4>
       <div className='groups-list'>
         {groups.map((group) => (
@@ -40,9 +35,10 @@ const Groups = () => {
             <div className="single-group-container" >
               <img src={group.previewImage} alt={group.name} className="groups-preview-image"></img>
               <div className='single-group-text-container'>
-                <div className='group-name'>{group.name}  </div>
+                <h2 className='group-name'>{group.name}  </h2>
                 <div className='group-city-state'>{group.city}, {group.state}</div>
                 <div className='group-about'>{group.about}</div>
+                <div className='group-number-members'>{group.numMembers} members &#x2022; {group.private ? 'Private' : "Public"}</div>
               </div>
             </div>
           </Link>

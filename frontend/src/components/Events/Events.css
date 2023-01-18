@@ -20,6 +20,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    color: grey;
+    font-weight: 100;
 
 
 }

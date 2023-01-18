@@ -26,6 +26,7 @@ useEffect(() => {
   return (
     <div className='events-container'>
       <div className='modals'>
+        MOVE TO GROUP DETAILS PAGE
         <OpenModalButton
           buttonText="Create Event"
           modalComponent={<CreateEventModal />}

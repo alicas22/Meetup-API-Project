@@ -15,7 +15,7 @@
 .text-container {
     display: flex;
     flex-direction: column;
-    /* margin-right: 3rem; */
+
 }
 
 .header-quote {
@@ -39,18 +39,21 @@
     width: 80%;
     display: flex;
     margin: auto;
-
     justify-content: space-between;
 }
 
-.splash-page-link-container>div {
+
+ .img-link{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     color: #008294;
     font-weight: bold;
     cursor: pointer;
-    flex-grow: 1;
+
+
+}
+.img-link>span{
+    text-decoration: none;
 }
 
 .splash-page-link-container>div >span >i{
@@ -62,7 +65,7 @@
     display: block;
     width: 200px;
     height: 125px;
-    border-radius: 8px;
+    border-radius: .5em;
 }
 
 #light-red-blob{
@@ -88,4 +91,41 @@
     left: unset;
     transform: unset;
     z-index: -102;
+}
+
+
+.how-it-works-subtitle{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.mid-page-group-links{
+    display: flex;
+    flex-direction: row;
+    width:80%;
+    margin:auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mid-page,
+.mid-page-link-header,
+.mid-page-link-subtitle{
+    padding-right:2rem;
+   padding-bottom: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mid-page-link-header{
+    color: #008294;
+    font-weight: bold;
+    cursor: pointer;
 }

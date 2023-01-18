@@ -9,10 +9,8 @@
     display: flex;
     flex-direction: column;
 
-    width:70%;
-    margin:auto
-
-
+    width: 70%;
+    margin: auto
 }
 
 .groups-header {
@@ -20,8 +18,26 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    color: grey;
+    font-weight: 100;
+}
 
+.group-name {
+    line-height: 0;
+    color: black
+}
 
+.group-city-state {
+    color: #877457;
+    line-height: 0.5;
+    font-weight: 500;
+}
+
+.group-about,
+.group-number-members {
+    padding-top: 1rem;
+    color: #757575;
+    font-size: .9em
 }
 
 .single-group-container {

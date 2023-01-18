@@ -1,11 +1,10 @@
-import Groups from "../Groups";
-import Events from "../Events"
+
 import { NavLink } from "react-router-dom";
 import './EventsGroupsNav.css'
 
 
 function EventsGroupsNav() {
-
+ console.log('from eventsgroupnav')
 
 
     return (

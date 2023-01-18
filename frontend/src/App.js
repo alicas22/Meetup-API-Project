@@ -9,6 +9,7 @@ import GroupDetails from './components/GroupDetails'
 import Events from './components/Events'
 import EventDetails from './components/EventDetails'
 import EventsGroupsNav from "./components/EventsGroupsNav";
+import Profile from "./components/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           <Route path='/events'>
             <EventsGroupsNav />
             <Events />
+          </Route>
+          <Route path='/profile'>
+            <Profile />
           </Route>
         </Switch>
       )}

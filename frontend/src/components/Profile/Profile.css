@@ -1,0 +1,28 @@
+.profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.profile-picture-info-container{
+    display:flex;
+    flex-direction:row;
+    margin-top:5rem;
+}
+
+.profile-picture{
+    border-radius: 50%;
+    background-color: orange;
+    font-weight: 500;
+    color: rgb(17, 15, 15);
+    font-family: inherit;
+    font-size: 10rem;
+    height:20rem;
+    width:20rem;
+}
+
+.profile-info{
+    font-weight: 700;
+    font-size:2.625rem;
+}
