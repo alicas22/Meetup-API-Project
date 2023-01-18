@@ -41,10 +41,10 @@ export const removeGroup = (groupId) => {
   };
 };
 
-export const addGroupImage = (image, groupId) => {
+export const addGroupImage = (image) => {
   return {
     type: ADD_GROUP_IMAGE,
-    payload: { image, groupId }
+    payload:  image
   }
 }
 
@@ -174,7 +174,7 @@ export const groupsReducer = (state = initialState, action) => {
     case ADD_GROUP_IMAGE: {
       const newState = { ...state, allGroups:{...state.allGroups} };
       newState.allGroups[action.payload.groupId] = {
-        ...newState[action.payload.groupId],
+        ...newState[action.payload.id],
         previewImage: action.payload.image
       }
       return newState;

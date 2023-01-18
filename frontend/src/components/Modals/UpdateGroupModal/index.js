@@ -122,7 +122,7 @@ function UpdateGroupModal() {
                         onChange={(e) => setState(e.target.value)}
                     />
                 </label>
-                <label>
+                {/* <label>
                     Image
                     <input
                         type="url"
@@ -131,7 +131,7 @@ function UpdateGroupModal() {
 
                         placeholder="https://example.com"
                     />
-                </label>
+                </label> */}
                 <button type="submit" className="create-group-form-button">Update Group</button>
             </form>
         </div>

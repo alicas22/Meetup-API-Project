@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 // import './UpdateGroup.css';
 import { deleteGroup } from "../../../store/groups";
@@ -9,7 +10,10 @@ function DeleteGroupModal() {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
-    const { groupId } = useParams()
+    const groupId = useSelector(state => state.groups.singleGroup.id)
+    const history = useHistory()
+
+  
 
 
     const handleSubmit = (e) => {
@@ -18,10 +22,13 @@ function DeleteGroupModal() {
 
             return dispatch(deleteGroup(groupId))
                 .then(closeModal)
+                .then(history.push('/'))
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
+
+
 
 
     };
