@@ -22,8 +22,23 @@
     flex-direction: column;
     color: grey;
     font-weight: 100;
+}
+.event-time{
+    color: #877457;
+    line-height: 0.5;
+    font-weight: 500;
+}
 
+.event-name{
+    line-height: 0;
+    color: black
+}
 
+.event-city-state,
+.event-attendees{
+    padding-top: 1rem;
+    color: #757575;
+    font-size: .9em
 }
 
 .single-event-container {
