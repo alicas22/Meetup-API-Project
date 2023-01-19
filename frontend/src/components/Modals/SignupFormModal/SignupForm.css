@@ -19,7 +19,7 @@
     padding-bottom: 8px;
     padding-top: 12px;
     width: 15%;
-    
+
 }
 
 
@@ -62,7 +62,6 @@ input:focus {
 }
 
 .signup-form-button {
-
     border-radius: 8px;
     cursor: pointer;
     color: #fff;

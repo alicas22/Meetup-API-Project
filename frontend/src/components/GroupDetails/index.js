@@ -14,14 +14,12 @@ const GroupDetails = () => {
     const { groupId } = useParams()
     const group = useSelector((state => state.groups.singleGroup))
 
-
     useEffect(() => {
         dispatch(getSingleGroupThunk(groupId))
     }, [dispatch])
 
-
-    if (!group) return null
-    return (
+    if (group === undefined) return null
+    return group && (
         <div className="group-details-container">
             <div className='group-details-header'>
                 {group.GroupImages && (<img src={group.GroupImages[0].url} className="group-details-header-image" />)}
@@ -29,36 +27,42 @@ const GroupDetails = () => {
                     <h1 className='group-details-name'>{group.name}</h1>
                     <div className='group-details-city-state'>
                         <i className="fa-solid fa-location-dot"></i>
-                        {group.city}, {group.state}</div>
+                        <span className="group-details-indent1">{group.city}, {group.state}</span></div>
                     <div className='group-details-members-info'>
                         <i className="fa-solid fa-users"></i>
-                        {group.numMembers} members &#x2022; {group.private ? 'Private' : "Public"}
+                        <span className="group-details-indent2"> {group.numMembers} members &#x2022; {group.private ? 'Private' : "Public"}</span>
                     </div>
                     <div className="group-details-organized-by">
                         <i className="fa-solid fa-user"></i>
-
+                        <span className="group-details-indent3">Organized by {group.Organizer?.firstName} {group.Organizer?.lastName}</span>
                     </div>
                     <div className='group-details-crud'>
-                        <div className='group-details-update-group'>
-                            <OpenModalButton
-                                buttonText="Update Group"
-                                modalComponent={<UpdateGroupModal prop={group} />}
-                            />
-                        </div>
-                        <div className='modals-logged-out'>
-                            <OpenModalButton
-                                buttonText="Delete Group"
-                                modalComponent={<DeleteGroupModal />}
-                            />
-                        </div>
-                        <div className='modals'>
+                        <div className='group-details-create-event'>
 
                             <OpenModalButton
                                 buttonText="Create Event"
                                 modalComponent={<CreateEventModal />}
                             />
                         </div>
+                        <div className='group-details-update-group'>
+                            <OpenModalButton
+                                buttonText="Update Group"
+                                modalComponent={<UpdateGroupModal prop={group} />}
+                            />
+                        </div>
+                        <div className='group-details-delete-group'>
+                            <OpenModalButton
+                                buttonText="Delete Group"
+                                modalComponent={<DeleteGroupModal />}
+                            />
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div className='group-details-center-divider'>About</div>
+            <div className='group-details-body'>
+                <div className='group-details-about-text'>
+                    {group.about}
                 </div>
             </div>
         </div>

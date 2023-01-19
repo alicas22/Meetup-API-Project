@@ -1,7 +1,11 @@
 .group-details-container{
     display: flex;
+    flex-direction: column;
     justify-content: start;
     align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgb(238, 238, 238);
+
 }
 
 .group-details-header{
@@ -9,6 +13,7 @@
     direction:row;
     width: 80%;
     margin:auto
+
 }
 
 .header-image{
@@ -23,5 +28,82 @@
     border-radius: .5rem;
 }
  .group-details-info-container{
-    padding-left: 20px;
+    display: flex;
+    flex-direction:column;
+    justify-content: start;
+    align-items:start;
+    padding-left:30px;
+    line-height: 2rem;
  }
+
+ .group-details-city-state,
+ .group-details-members-info,
+ .group-details-organized-by{
+    color:#212121;
+    line-height:2rem
+ }
+
+ .group-details-name{
+    border-top: 0;
+    margin-top:0
+ }
+
+ .group-details-indent1{
+    padding-left: 1rem;
+ }
+ .group-details-indent2{
+    padding-left: 1rem;
+ }
+ .group-details-indent3{
+    padding-left: 1rem;
+ }
+
+ .group-details-crud{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+ }
+
+.group-details-create-event,
+.group-details-update-group,
+.group-details-delete-group{
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    fill: #fff;
+    background-color: #f65858;
+    border: solid #f65858;
+    padding: 8px 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    height: auto;
+    margin:5px;
+    text-align: center;
+}
+
+.group-details-center-divider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top:1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    width:100%;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color:grey
+}
+
+.group-details-body{
+    height:100%;
+    width: 100%;
+}
+
+.group-details-about-text{
+    text-align: center;
+}
