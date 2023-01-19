@@ -1,8 +1,12 @@
-.create-group-container {
+/* .create-group-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top:auto
+    max-width: 600px;
+    max-height: 100vh;
+
+
+
 }
 
 .create-group-form {
@@ -81,4 +85,4 @@ textarea:hover {
     height: 3rem;
     margin-top: 1.5rem;
     margin-bottom: 1rem;
-}
+} */

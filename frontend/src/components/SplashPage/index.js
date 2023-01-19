@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
+import {getGroups} from '../../store/groups'
 import './SplashPage.css'
 function SplashPage() {
+    // const dispatch = useDispatch()
 
-    // const linkToEvent= ()=>{
-    //     return(
-    //         <NavLink to = './events' />
-    //     )
-    // }
+    // useEffect(() => {
+    //     dispatch(getGroups())
+    //   }, [])
+
 
     return (
         <>

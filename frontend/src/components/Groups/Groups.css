@@ -2,7 +2,7 @@
     height: 100px;
     width: 175px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: .5rem;
 }
 
 .groups-container {

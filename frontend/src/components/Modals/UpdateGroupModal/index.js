@@ -1,48 +1,48 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
-import './CreateGroup.css';
-import { createGroup } from "../../../store/groups";
+// import './UpdateGroup.css';
+import { addGroupImageThunk, updateGroup } from "../../../store/groups";
 import { useHistory } from 'react-router-dom'
 
-function CreateGroupModal() {
+function UpdateGroupModal(props) {
     const dispatch = useDispatch();
-    const [name, setName] = useState("");
-    const [about, setAbout] = useState("");
-    const [type, setType] = useState("");
-    const [privated, setPrivated] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [imageURL, setImageURL] = useState("");
-    const [errors, setErrors] = useState([]);
+    const [updateName, setUpdateName] = useState(props.prop.name);
+    const [updateAbout, setUpdateAbout] = useState(props.prop.about);
+    const [updateType, setUpdateType] = useState(props.prop.type);
+    const [updatePrivated, setUpdatePrivated] = useState(props.prop.private);
+    const [updateCity, setUpdateCity] = useState(props.prop.city);
+    const [updateState, setUpdateState] = useState(props.prop.state);
+    // const [imageURL, setImageURL] = useState("");
+    const [updateErrors, setUpdateErrors] = useState([]);
     const { closeModal } = useModal();
+    const groupId = useSelector(state => state.groups.singleGroup.id)
+    const organizerId = useSelector(state => state.groups.singleGroup.organizerId)
+    const sessionUser = useSelector(state => state.session.user);
     const history = useHistory()
-    const sessionUser = useSelector(state => state.session.user)
+    console.log('initial useState', updateName, updateAbout, updateType, updatePrivated)
 
-    const handleSubmit =  (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors([]);
+        setUpdateErrors([]);
         const group = {
-            name,
-            about,
-            type,
-            private: privated,
-            city,
-            state
+            name: updateName,
+            about: updateAbout,
+            type: updateType,
+            private: updatePrivated,
+            city: updateCity,
+            state: updateState
         }
-
-        const newGroupImage = {
-            url: imageURL,
-            preview: true
-        }
-        return dispatch(createGroup(group, newGroupImage, sessionUser))
+        console.log('group from updateGroupModal', group)
+        const updatedGroup = dispatch(updateGroup(groupId, group, sessionUser))
             .then((newGroup) => {
                 history.push(`/groups/${newGroup.id}`)
                 closeModal()
             })
             .catch(async (res) => {
                 const data = await res.json;
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setUpdateErrors(data.errors);
+                if (data && organizerId !== sessionUser.id) setUpdateErrors(["You are not authorized to do this operation"]);
             })
 
 
@@ -55,27 +55,26 @@ function CreateGroupModal() {
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLxuHMX3PPsXyTanvhUj2POWJLhON6SfVd3lJNxfcyQsV03uSSXhKx97JonQ5-znzut2s&usqp=CAU"
                 alt="logo"
             />
-            <h1>Create Group</h1>
+            <h1>Update Group</h1>
             <form onSubmit={handleSubmit} className='create-group-form'>
                 <ul className="validation-errors">
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    {updateErrors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
                 <label>
                     Name
                     <input
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
+                        value={updateName}
+                        onChange={(e) => setUpdateName(e.target.value)}
+
                     />
                 </label>
                 <label>
                     About
                     <textarea
                         type="text"
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                        required
+                        value={updateAbout}
+                        onChange={(e) => setUpdateAbout(e.target.value)}
                         className="text-about"
                     />
                 </label>
@@ -84,9 +83,8 @@ function CreateGroupModal() {
                 </label>
                 <select
                     name='type'
-                    onChange={e => setType(e.target.value)}
-                    value={type}
-                    required
+                    onChange={e => setUpdateType(e.target.value)}
+                    value={updateType}
                 >
                     <option value='' disable selected>Select a group type...</option>
                     <option value='Online'>Online</option>
@@ -97,47 +95,44 @@ function CreateGroupModal() {
                 </label>
                 <select
                     name='privated'
-                    value={privated}
-                    onChange={(e) => setPrivated(e.target.value)}
-                    required
+                    value={updatePrivated}
+                    onChange={(e) => setUpdatePrivated(e.target.value)}
                 >
                     <option value='' disable selected>Is Group Private?</option>
-                    <option value={true}>Yes</option>
                     <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select>
                 <div></div>
                 <label>
                     City
                     <input
                         type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        required
+                        value={updateCity}
+                        onChange={(e) => setUpdateCity(e.target.value)}
                     />
                 </label>
                 <label>
                     State
                     <input
                         type="state"
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                        required
+                        value={updateState}
+                        onChange={(e) =>  setUpdateState(e.target.value)}
                     />
                 </label>
-                <label>
+                {/* <label>
                     Image
                     <input
                         type="url"
                         value={imageURL}
                         onChange={(e) => setImageURL(e.target.value)}
-                        required
+
                         placeholder="https://example.com"
                     />
-                </label>
-                <button type="submit" className="create-group-form-button">Create Group</button>
+                </label> */}
+                <button type="submit" className="create-group-form-button">Update Group</button>
             </form>
         </div>
     );
 }
 
-export default CreateGroupModal;
+export default UpdateGroupModal;
