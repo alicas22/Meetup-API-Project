@@ -33,7 +33,7 @@ function SignupFormModal() {
     <div className="signup-container">
     <img
           className="signin-form-icon"
-          src="https://resource.logitechg.com/w_659,c_limit,f_auto,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/og-fallback.jpg?v=1"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLxuHMX3PPsXyTanvhUj2POWJLhON6SfVd3lJNxfcyQsV03uSSXhKx97JonQ5-znzut2s&usqp=CAU"
           alt="logo"
         />
       <h1>Sign Up</h1>

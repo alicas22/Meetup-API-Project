@@ -22,9 +22,7 @@ const validateCreation = [
         .isIn(['Online', 'In person'])
         .withMessage(`Type must be 'Online' or 'In person'`),
     check('private')
-        .custom(async value => {
-            if(typeof Boolean(value) !== "boolean") return Promise.reject()
-        })
+        .isBoolean()
         .withMessage('Private must be a boolean'),
     check('city')
         .isLength({ min: 2 })
@@ -406,7 +404,7 @@ router.post('/:groupId/images', requireAuth, async (req, res, next) => {
         if (group.organizerId != user.id) { //check if organizer
             err.title = "Not authorized"
             err.status = 401
-            err.message = `Must be organizer to delete group`
+            err.message = `Must be organizer to upload photo`
             return next(err)
         }
         const newImage = await GroupImage.create({
@@ -605,10 +603,10 @@ router.put('/:groupId', requireAuth, validateCreation, async (req, res, next) =>
     const group = await Group.findByPk(groupId)
 
     if (group) {
-        if (group.organizerId !== id) { //make sure authorized to delete
+        if (group.organizerId !== id) { //make sure authorized to edit
             err.title = "Not authorized"
             err.status = 401
-            err.message = `Must be organizer to delete group`
+            err.message = `Must be organizer to edit group`
             return next(err)
         }
         await group.update({

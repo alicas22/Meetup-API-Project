@@ -18,10 +18,10 @@ export const loadGroups = (groups) => {
 };
 
 
-export const addGroup = (group) => {
+export const addGroup = (newGroup, newSingleGroup) => {
   return {
     type: ADD_GROUP,
-    payload: group,
+    payload: {newGroup,newSingleGroup}
   };
 };
 
@@ -41,12 +41,12 @@ export const removeGroup = (groupId) => {
   };
 };
 
-export const addGroupImage = (image) => {
-  return {
-    type: ADD_GROUP_IMAGE,
-    payload:  image
-  }
-}
+// export const addGroupImage = (image) => {
+//   return {
+//     type: ADD_GROUP_IMAGE,
+//     payload: image
+//   }
+// }
 
 export const getSingleGroup = (group) => {
   return {
@@ -66,21 +66,21 @@ export const getSingleGroupThunk = (groupId) => async (dispatch) => {
   }
 }
 
-export const addGroupImageThunk = (image, groupId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/groups/${groupId}/images`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(image),
-  })
+// export const addGroupImageThunk = (image, groupId) => async (dispatch) => {
+//   const response = await csrfFetch(`/api/groups/${groupId}/images`, {
+//     method: 'POST',
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(image),
+//   })
 
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(addGroupImage(data))
-    return data;
-  }
-}
+//   if (response.ok) {
+//     const data = await response.json();
+//     dispatch(addGroupImage(data))
+//     return data;
+//   }
+// }
 
 export const getGroups = () => async (dispatch) => {
   const response = await csrfFetch("/api/groups");
@@ -92,7 +92,7 @@ export const getGroups = () => async (dispatch) => {
 };
 
 
-export const createGroup = (group) => async (dispatch) => {
+export const createGroup = (group, image, sessionUser) => async (dispatch) => {
 
   const response = await csrfFetch("/api/groups", {
     method: "POST",
@@ -103,14 +103,33 @@ export const createGroup = (group) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(addGroup(data));
-    return data;
+    const newGroup = await response.json();
+
+
+    const response2 = await csrfFetch(`/api/groups/${newGroup.id}/images`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(image),
+    })
+
+    if (response2.ok) {
+      const newImage = await response2.json();
+      console.log("newImage from Store:", newImage)
+      const newSingleGroup = {...newGroup}
+      newSingleGroup['previewImage'] = newImage
+      newSingleGroup['Organizer'] = sessionUser
+
+      dispatch(addGroup(newGroup, newSingleGroup))
+      return newSingleGroup
+    }
+
   }
 };
 
 
-export const updateGroup = (groupId, group) => async (dispatch) => {
+export const updateGroup = (groupId, group, sessionUser) => async (dispatch) => {
   const response = await csrfFetch(`/api/groups/${groupId}`, {
     method: "PUT",
     headers: {
@@ -147,7 +166,7 @@ const initialState = {
 export const groupsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_GROUPS: {
-      const newState = { allGroups:{}, singleGroup:{}}
+      const newState = { allGroups: {}, singleGroup: {} }
       action.payload.Groups.forEach((group) => {
         newState.allGroups[group.id] = group;
       });
@@ -155,24 +174,25 @@ export const groupsReducer = (state = initialState, action) => {
     }
 
     case ADD_GROUP: {
-      const newState = { ...state, allGroups:{...state.allGroups} };
-      newState.allGroups[action.payload.id] = action.payload;
+      const newState = { ...state, allGroups: { ...state.allGroups }, singleGroup: {} };
+      newState.allGroups[action.payload.newGroup.id] = action.payload.newGroup;
+      newState.singleGroup = action.payload.newSingleGroup
       return newState;
     }
 
     case UPDATE_GROUP: {
-      const newState = { ...state, allGroups:{...state.allGroups} };
+      const newState = { ...state, allGroups: { ...state.allGroups } };
       newState.allGroups[action.payload.id] = action.payload;
       return newState;
     }
 
     case DELETE_GROUP: {
-      const newState = { ...state, allGroups:{...state.allGroups} };
+      const newState = { ...state, allGroups: { ...state.allGroups } };
       delete newState.allGroups[action.payload];
       return newState;
     }
     case ADD_GROUP_IMAGE: {
-      const newState = { ...state, allGroups:{...state.allGroups} };
+      const newState = { ...state, allGroups: { ...state.allGroups } };
       newState.allGroups[action.payload.groupId] = {
         ...newState[action.payload.id],
         previewImage: action.payload.image
@@ -181,7 +201,7 @@ export const groupsReducer = (state = initialState, action) => {
     }
 
     case GET_SINGLE_GROUP: {
-      const newState = { allGroups:{}, singleGroup:{} };
+      const newState = { allGroups: {}, singleGroup: {} };
       newState.singleGroup = action.payload
       return newState;
     }

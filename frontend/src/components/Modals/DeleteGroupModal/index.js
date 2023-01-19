@@ -11,26 +11,25 @@ function DeleteGroupModal() {
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
     const groupId = useSelector(state => state.groups.singleGroup.id)
+    const organizerId = useSelector(state => state.groups.singleGroup.organizerId)
+    const sessionUser = useSelector(state => state.session.user);
     const history = useHistory()
 
-  
+
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
 
-            return dispatch(deleteGroup(groupId))
-                .then(closeModal)
-                .then(history.push('/'))
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
-
-
-
-
+        dispatch(deleteGroup(groupId))
+            .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
+                
+            })
+            history.push('/')
     };
 
     return (

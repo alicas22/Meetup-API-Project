@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { getGroups } from '../../store/groups.js';
 import { getSingleGroupThunk } from '../../store/groups.js';
+import CreateEventModal from '../Modals/CreateEventModal/index.js';
 import UpdateGroupModal from '../Modals/UpdateGroupModal/index.js';
 import DeleteGroupModal from '../Modals/DeleteGroupModal/index.js';
 import LoginFormModal from '../Modals/LoginFormModal/index.js';
@@ -25,7 +26,7 @@ const GroupDetails = () => {
     return (
         <div className="group-details-container">
             <div className='group-details-header'>
-                {/* {group.GroupImages && (<img src={group.GroupImages[0].url} className="group-details-header-image" />)} */}
+                {group.GroupImages && (<img src={group.GroupImages[0].url} className="group-details-header-image" />)}
                 <div className='group-details-info-container'>
                     <h1 className='group-details-name'>{group.name}</h1>
                     <div className='group-details-city-state'>
@@ -50,6 +51,13 @@ const GroupDetails = () => {
                             <OpenModalButton
                                 buttonText="Delete Group"
                                 modalComponent={<DeleteGroupModal />}
+                            />
+                        </div>
+                        <div className='modals'>
+                            
+                            <OpenModalButton
+                                buttonText="Create Event"
+                                modalComponent={<CreateEventModal />}
                             />
                         </div>
                     </div>

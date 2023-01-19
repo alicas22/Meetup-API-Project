@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import './CreateGroup.css';
-import { addGroupImageThunk, createGroup } from "../../../store/groups";
-import { useParams } from 'react-router-dom'
+import { createGroup } from "../../../store/groups";
+import { useHistory } from 'react-router-dom'
 
-function SignupFormModal() {
+function CreateGroupModal() {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
     const [about, setAbout] = useState("");
@@ -16,37 +16,33 @@ function SignupFormModal() {
     const [imageURL, setImageURL] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
-    const { groupId } = useParams()
-
+    const history = useHistory()
+    const sessionUser = useSelector(state => state.session.user)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        const payload = {
+        const group = {
             name,
             about,
             type,
-            privated,
+            private: privated,
             city,
             state
         }
 
-        if (imageURL) {
-            return dispatch(createGroup(payload))
-                .then(dispatch(addGroupImageThunk({ url: imageURL, preview: true }, groupId)))
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
-        } else {
-            return dispatch(createGroup(payload))
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
+        const newGroupImage = {
+            url: imageURL,
+            preview: true
         }
+         const newGroup = dispatch(createGroup(group, newGroupImage, sessionUser))
+            .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            })
+
+            return history.push(`/groups/${newGroup.id}`)
 
     };
 
@@ -54,7 +50,7 @@ function SignupFormModal() {
         <div className="create-group-container ">
             <img
                 className="create-group-form-icon"
-                src="https://resource.logitechg.com/w_659,c_limit,f_auto,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/og-fallback.jpg?v=1"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLxuHMX3PPsXyTanvhUj2POWJLhON6SfVd3lJNxfcyQsV03uSSXhKx97JonQ5-znzut2s&usqp=CAU"
                 alt="logo"
             />
             <h1>Create Group</h1>
@@ -88,6 +84,7 @@ function SignupFormModal() {
                     name='type'
                     onChange={e => setType(e.target.value)}
                     value={type}
+                    required
                 >
                     <option value='' disable selected>Select a group type...</option>
                     <option value='Online'>Online</option>
@@ -100,10 +97,11 @@ function SignupFormModal() {
                     name='privated'
                     value={privated}
                     onChange={(e) => setPrivated(e.target.value)}
+                    required
                 >
                     <option value='' disable selected>Is Group Private?</option>
-                    <option value={false}>No</option>
                     <option value={true}>Yes</option>
+                    <option value={false}>No</option>
                 </select>
                 <div></div>
                 <label>
@@ -130,7 +128,7 @@ function SignupFormModal() {
                         type="url"
                         value={imageURL}
                         onChange={(e) => setImageURL(e.target.value)}
-                        
+                        required
                         placeholder="https://example.com"
                     />
                 </label>
@@ -140,4 +138,4 @@ function SignupFormModal() {
     );
 }
 
-export default SignupFormModal;
+export default CreateGroupModal;
