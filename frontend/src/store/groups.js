@@ -21,7 +21,7 @@ export const loadGroups = (groups) => {
 export const addGroup = (newGroup, newSingleGroup) => {
   return {
     type: ADD_GROUP,
-    payload: {newGroup,newSingleGroup}
+    payload: { newGroup, newSingleGroup }
   };
 };
 
@@ -115,10 +115,10 @@ export const createGroup = (group, image, sessionUser) => async (dispatch) => {
 
     if (response2.ok) {
       const newImage = await response2.json();
-      const newSingleGroup = {...newGroup}
-      newGroup['previewImage'] = newImage
+      const newSingleGroup = { ...newGroup }
+      newGroup['previewImage'] = newImage.url
       newSingleGroup['Organizer'] = sessionUser
-      newSingleGroup['GroupImages'] = newImage
+      newSingleGroup['GroupImages'] = [newImage]
 
       dispatch(addGroup(newGroup, newSingleGroup))
       return newGroup
@@ -179,8 +179,10 @@ export const groupsReducer = (state = initialState, action) => {
     }
 
     case UPDATE_GROUP: {
-      const newState = { ...state, allGroups: { ...state.allGroups } };
-      newState.allGroups[action.payload.id] = action.payload;
+      // const newState = { ...state, allGroups: { ...state.allGroups } };
+      const newState = { ...state };
+      newState.groups = { ...state.groups, [action.payload.id]: action.payload }
+      newState.singleGroup = { ...newState.singleGroup, ...action.payload }
       return newState;
     }
 

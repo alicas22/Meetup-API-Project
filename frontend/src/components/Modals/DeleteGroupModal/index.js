@@ -29,7 +29,7 @@ function DeleteGroupModal() {
                 if (data && organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
 
             })
-            history.push('/')
+            history.push('/groups')
     };
 
     return (

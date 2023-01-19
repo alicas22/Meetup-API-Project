@@ -22,7 +22,7 @@ function CreateEventModal() {
     const { closeModal } = useModal();
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
-    const groupId = useSelector(state =>state.groups.singleGroup.id)
+    const groupId = useSelector(state => state.groups.singleGroup.id)
 
     // useEffect(() => {
     //     dispatch(getSingleEventThunk(eventId))
@@ -47,17 +47,21 @@ function CreateEventModal() {
             preview: true
         }
 
-        const newEvent = dispatch(createEvent(event, newEventImage, sessionUser, groupId ))
-            .then(closeModal)
+        return dispatch(createEvent(event, newEventImage, sessionUser, groupId))
+            .then((newEvent) => {
+                console.log("newEvent from createEvent modal", newEvent)
+                console.log('newEvent.id', newEvent.id)
+                history.push(`/events/${newEvent.id}`)
+                closeModal()
+            })
             .catch(async (res) => {
-                const data = await res.json();
+                const data = await res.json;
                 if (data && data.errors) setErrors(data.errors);
             });
 
-        return history.push(`/events/${newEvent.id}`)
     };
 
-    if(groupId === undefined) return null
+    if (groupId === undefined) return null
     return (
         <div className="create-event-container">
             <img

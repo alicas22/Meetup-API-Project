@@ -101,8 +101,8 @@ export const createEvent = (event, image, sessionUser,groupId) => async (dispatc
 
   if (response.ok) {
     const newEvent = await response.json();
-    console.log("newEvent from events store", newEvent)
-    const response2 = await csrfFetch(`api/events/${newEvent.id}/images`, {
+
+    const response2 = await csrfFetch(`/api/events/${newEvent.id}/images`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -112,10 +112,12 @@ export const createEvent = (event, image, sessionUser,groupId) => async (dispatc
   if (response2.ok){
     const newImage = await response2.json();
     const newSingleEvent = {...newEvent}
-    console.log("newImage from events store", newImage)
-    // newSingleEvent[]
+    newSingleEvent['EventImages']=newImage
+    console.log("newEvent from events store", newEvent.id)
+    console.log("newSingleEvent from events store", newSingleEvent)
     // newSingleEvent[]
     dispatch(addEvent(newEvent, newSingleEvent))
+    return newEvent
   }
 };
 }
@@ -167,7 +169,7 @@ export const eventsReducer = (state = initialState, action) => {
 
     case ADD_EVENT: {
       const newState = { ...state, allEvents: { ...state.allEvents }, singleEvent: {} };
-      newState.allGroups[action.payload.newEvent.id] = action.payload.newEvent;
+      newState.allEvents[action.payload.newEvent.id] = action.payload.newEvent;
       newState.singleEvent = action.payload.newSingleEvent
       return newState;
     }

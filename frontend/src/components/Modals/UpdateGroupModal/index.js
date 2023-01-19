@@ -5,44 +5,47 @@ import { useModal } from "../../../context/Modal";
 import { addGroupImageThunk, updateGroup } from "../../../store/groups";
 import { useHistory } from 'react-router-dom'
 
-function UpdateGroupModal() {
+function UpdateGroupModal(props) {
     const dispatch = useDispatch();
-    const [updateName, setUpdateName] = useState("");
-    const [updateAbout, setUpdateAbout] = useState("");
-    const [updateType, setUpdateType] = useState("");
-    const [updatePrivated, setUpdatePrivated] = useState("");
-    const [updateCity, setUpdateCity] = useState("");
-    const [updateState, setUpdateState] = useState("");
+    const [updateName, setUpdateName] = useState(props.prop.name);
+    const [updateAbout, setUpdateAbout] = useState(props.prop.about);
+    const [updateType, setUpdateType] = useState(props.prop.type);
+    const [updatePrivated, setUpdatePrivated] = useState(props.prop.private);
+    const [updateCity, setUpdateCity] = useState(props.prop.city);
+    const [updateState, setUpdateState] = useState(props.prop.state);
     // const [imageURL, setImageURL] = useState("");
     const [updateErrors, setUpdateErrors] = useState([]);
     const { closeModal } = useModal();
     const groupId = useSelector(state => state.groups.singleGroup.id)
-    const organizerId =useSelector(state => state.groups.singleGroup.organizerId)
+    const organizerId = useSelector(state => state.groups.singleGroup.organizerId)
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory()
-
+    console.log('initial useState', updateName, updateAbout, updateType, updatePrivated)
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setUpdateErrors([]);
         const group = {
-            name:updateName,
-            about:updateAbout,
-            type:updateType,
-            private:updatePrivated,
-            city:updateCity,
-            state:updateState
+            name: updateName,
+            about: updateAbout,
+            type: updateType,
+            private: updatePrivated,
+            city: updateCity,
+            state: updateState
         }
+        console.log('group from updateGroupModal', group)
+        const updatedGroup = dispatch(updateGroup(groupId, group, sessionUser))
+            .then((newGroup) => {
+                history.push(`/groups/${newGroup.id}`)
+                closeModal()
+            })
+            .catch(async (res) => {
+                const data = await res.json;
+                if (data && data.errors) setUpdateErrors(data.errors);
+                if (data && organizerId !== sessionUser.id) setUpdateErrors(["You are not authorized to do this operation"]);
+            })
 
-        const updatedGroup =  dispatch(updateGroup( groupId, group, sessionUser))
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setUpdateErrors(data.errors);
-                    if (data && organizerId !== sessionUser.id) setUpdateErrors(["You are not authroized to do this operation"]);
-                });
 
-                return history.push(`/groups/${groupId}`)
     };
 
     return (
@@ -113,7 +116,7 @@ function UpdateGroupModal() {
                     <input
                         type="state"
                         value={updateState}
-                        onChange={(e) => setUpdateState(e.target.value)}
+                        onChange={(e) =>  setUpdateState(e.target.value)}
                     />
                 </label>
                 {/* <label>

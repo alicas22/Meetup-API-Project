@@ -19,7 +19,7 @@ function CreateGroupModal() {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         setErrors([]);
         const group = {
@@ -35,14 +35,16 @@ function CreateGroupModal() {
             url: imageURL,
             preview: true
         }
-         const newGroup = dispatch(createGroup(group, newGroupImage, sessionUser))
-            .then(closeModal)
+        return dispatch(createGroup(group, newGroupImage, sessionUser))
+            .then((newGroup) => {
+                history.push(`/groups/${newGroup.id}`)
+                closeModal()
+            })
             .catch(async (res) => {
-                const data = await res.json();
+                const data = await res.json;
                 if (data && data.errors) setErrors(data.errors);
             })
 
-            return history.push(`/groups/${newGroup.id}`)
 
     };
 

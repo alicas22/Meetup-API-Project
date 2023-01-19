@@ -20,7 +20,6 @@ const GroupDetails = () => {
     }, [dispatch])
 
 
-
     if (!group) return null
     return (
         <div className="group-details-container">
@@ -43,7 +42,7 @@ const GroupDetails = () => {
                         <div className='group-details-update-group'>
                             <OpenModalButton
                                 buttonText="Update Group"
-                                modalComponent={<UpdateGroupModal />}
+                                modalComponent={<UpdateGroupModal prop={group} />}
                             />
                         </div>
                         <div className='modals-logged-out'>

@@ -17,7 +17,7 @@ function DeleteEventModal() {
     const history = useHistory()
 
 
-   
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -29,7 +29,7 @@ function DeleteEventModal() {
                 // if (data && organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
 
             })
-            history.push('/')
+            history.push('/events')
     };
     // if(organizerId === undefined) return null
     return (
