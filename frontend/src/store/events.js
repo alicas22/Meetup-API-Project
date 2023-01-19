@@ -62,6 +62,7 @@ export const getSingleEventThunk = (eventId) => async (dispatch) =>{
   if(response.ok){
     const data = await response.json();
     dispatch(getSingleEvent(data))
+    return data;
   }
 }
 
@@ -181,7 +182,7 @@ export const eventsReducer = (state = initialState, action) => {
     }
 
     case DELETE_EVENT: {
-      const newState = { ...state };
+      const newState = { ...state, allEvents:{...state.allEvents} };
       delete newState.allEvents[action.payload];
       return newState;
     }

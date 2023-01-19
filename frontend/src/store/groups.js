@@ -88,6 +88,7 @@ export const getGroups = () => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(loadGroups(data));
+    return data
   }
 };
 

@@ -23,13 +23,16 @@ function DeleteGroupModal() {
         setErrors([]);
 
         dispatch(deleteGroup(groupId))
-            .then(closeModal)
+            .then(() => {
+                closeModal()
+                history.push('/groups')
+            })
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
 
             })
-            history.push('/groups')
+
     };
 
     return (

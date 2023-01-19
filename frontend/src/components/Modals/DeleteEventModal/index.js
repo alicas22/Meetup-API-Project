@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
-
+import { getGroups, getSingleGroupThunk } from "../../../store/groups";
 import { deleteEvent } from "../../../store/events";
 import { useParams } from 'react-router-dom'
 
@@ -12,9 +12,14 @@ function DeleteEventModal() {
     const { closeModal } = useModal();
     const eventId = useSelector(state => state.events.singleEvent.id)
     const groupId = useSelector(state=>state.events.singleEvent.groupId)
-    // const organizerId = useSelector(state => state.allGroups[groupId].organizerId)
+    const organizerId = useSelector(state => state.groups.singleGroup.organizerId)
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory()
+
+        console.log("eventId", eventId)
+        console.log("groupId", groupId)
+        console.log("sessionUser", sessionUser)
+        console.log("group", organizerId)
 
 
 
@@ -23,15 +28,17 @@ function DeleteEventModal() {
         setErrors([]);
 
         dispatch(deleteEvent(eventId))
-            .then(closeModal)
+            .then(()=>{
+                closeModal()
+                history.push('/events')
+            })
             .catch(async (res) => {
                 const data = await res.json();
-                // if (data && organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
-
+                if (data && (organizerId !== sessionUser.id)) setErrors(["You are not authorized to do this operation"]);
             })
-            history.push('/events')
+            
     };
-    // if(organizerId === undefined) return null
+    if(!organizerId) return null
     return (
         <div className="create-group-container ">
             <img

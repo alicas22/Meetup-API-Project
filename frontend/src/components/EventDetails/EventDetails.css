@@ -1,0 +1,127 @@
+.event-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border-top: 1px solid rgb(238, 238, 238);
+}
+
+.event-details-header-container {
+    width: 80%
+}
+
+.event-details-name {
+    font-weight: bold;
+    justify-content: center;
+
+}
+
+.event-details-hosted-by {
+    display: flex;
+    flex-direction: row;
+}
+
+.event-details-text-indent {
+    text-indent: .5rem;
+}
+
+
+.event-details-modals-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+
+.event-detail-delete-modal {
+    border-radius: 8px;
+    cursor: pointer;
+    color: #fff;
+    fill: #fff;
+    background-color: #f65858;
+    border: solid #f65858;
+    padding: 8px 12px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    height: auto;
+    margin: 5px;
+    text-align: center;
+}
+
+.event-details-border {
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgb(238, 238, 238);
+
+}
+
+.event-details-main-body {
+    width: 90%;
+}
+
+.event-details-image-card-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.event-details-image {
+    height: 350px;
+    width: 550px;
+    object-fit: cover;
+
+    margin-top: 2rem;
+}
+
+.event-details-info-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50%;
+    width: 80%;
+
+}
+
+.event-details-group-info-event-info-container {
+    margin-left: 2rem
+}
+
+.event-details-group-image {
+    width: 100px;
+    height: 100px;
+    border-radius: .5rem;
+    margin-top: 2rem;
+    object-fit: cover;
+
+}
+
+
+.event-details-info-card-group-info {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    color: black
+}
+
+.event-details-info-card-group-private {
+    font-weight: 100;
+    font-size: 15px;
+    padding-top: 2rem;
+    color: grey
+}
+
+.clock-date-time,
+.event-details-venue-location{
+    display:flex;
+    align-items: center;
+    line-height:1px;
+}
+ .fa-users-rectangle{
+    font-size: xx-large;
+ }
+.event-details-hosted-by{
+    display:flex;
+    align-items: center;
+    line-height: 1rem;
+}

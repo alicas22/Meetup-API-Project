@@ -22,12 +22,9 @@ function CreateEventModal() {
     const { closeModal } = useModal();
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
-    const groupId = useSelector(state => state.groups.singleGroup.id)
+    const group = useSelector(state => state.groups.singleGroup)
 
-    // useEffect(() => {
-    //     dispatch(getSingleEventThunk(eventId))
 
-    // }, [dispatch])
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -47,21 +44,20 @@ function CreateEventModal() {
             preview: true
         }
 
-        return dispatch(createEvent(event, newEventImage, sessionUser, groupId))
+        return dispatch(createEvent(event, newEventImage, sessionUser, group.id))
             .then((newEvent) => {
-                console.log("newEvent from createEvent modal", newEvent)
-                console.log('newEvent.id', newEvent.id)
                 history.push(`/events/${newEvent.id}`)
                 closeModal()
             })
             .catch(async (res) => {
                 const data = await res.json;
                 if (data && data.errors) setErrors(data.errors);
+                if (data && group.organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
             });
 
     };
 
-    if (groupId === undefined) return null
+    if (group.id === undefined) return null
     return (
         <div className="create-event-container">
             <img

@@ -55,13 +55,13 @@ function ProfileButton({ user }) {
         </div>
       <ul className={ulClassName} ref={ulRef}>
           <>
-            {/* <Link to="/profile" className="link" >
-              Your events
+            <Link to="/events" className="link" >
+              All events
             </Link>
-            <Link to="/profile" className="link" style = {{borderBottom:"1px solid #e6dede"}}>
-              Your groups
+            <Link to="/groups" className="link" style = {{borderBottom:"1px solid #e6dede"}}>
+              All groups
             </Link>
-            <Link to="/profile" className="link">
+            {/* <Link to="/profile" className="link">
               Your profile
             </Link> */}
             <li onClick={logout} className = 'link'>
