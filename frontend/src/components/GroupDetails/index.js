@@ -6,7 +6,6 @@ import { getSingleGroupThunk } from '../../store/groups.js';
 import CreateEventModal from '../Modals/CreateEventModal/index.js';
 import UpdateGroupModal from '../Modals/UpdateGroupModal/index.js';
 import DeleteGroupModal from '../Modals/DeleteGroupModal/index.js';
-import LoginFormModal from '../Modals/LoginFormModal/index.js';
 import OpenModalButton from '../Modals/OpenModalButton/index.js';
 import './GroupDetails.css'
 
@@ -54,7 +53,7 @@ const GroupDetails = () => {
                             />
                         </div>
                         <div className='modals'>
-                            
+
                             <OpenModalButton
                                 buttonText="Create Event"
                                 modalComponent={<CreateEventModal />}

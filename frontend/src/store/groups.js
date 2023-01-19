@@ -105,7 +105,6 @@ export const createGroup = (group, image, sessionUser) => async (dispatch) => {
   if (response.ok) {
     const newGroup = await response.json();
 
-
     const response2 = await csrfFetch(`/api/groups/${newGroup.id}/images`, {
       method: "POST",
       headers: {
@@ -116,20 +115,19 @@ export const createGroup = (group, image, sessionUser) => async (dispatch) => {
 
     if (response2.ok) {
       const newImage = await response2.json();
-      console.log("newImage from Store:", newImage)
       const newSingleGroup = {...newGroup}
-      newSingleGroup['previewImage'] = newImage
+      newGroup['previewImage'] = newImage
       newSingleGroup['Organizer'] = sessionUser
+      newSingleGroup['GroupImages'] = newImage
 
       dispatch(addGroup(newGroup, newSingleGroup))
-      return newSingleGroup
+      return newGroup
     }
-
   }
 };
 
 
-export const updateGroup = (groupId, group, sessionUser) => async (dispatch) => {
+export const updateGroup = (groupId, group) => async (dispatch) => {
   const response = await csrfFetch(`/api/groups/${groupId}`, {
     method: "PUT",
     headers: {

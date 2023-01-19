@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal";
 import './CreateEvent.css';
-import { addEventImageThunk, createEvent } from "../../../store/events";
+import { createEvent, getSingleEventThunk } from "../../../store/events";
 import { useParams } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+
 
 function CreateEventModal() {
     const dispatch = useDispatch();
@@ -18,12 +20,18 @@ function CreateEventModal() {
     const [imageURL, setImageURL] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
-    const { eventId } = useParams()
+    const history = useHistory()
+    const sessionUser = useSelector(state => state.session.user)
+    const groupId = useSelector(state =>state.groups.singleGroup.id)
 
+    // useEffect(() => {
+    //     dispatch(getSingleEventThunk(eventId))
+
+    // }, [dispatch])
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        const payload = {
+        const event = {
             venueId,
             name,
             type,
@@ -34,25 +42,22 @@ function CreateEventModal() {
             endDate
         }
 
-        if(imageURL){
-        return dispatch(createEvent(payload))
-            .then(dispatch(addEventImageThunk({url:imageURL, preview:true}, eventId)))
+        const newEventImage = {
+            url: imageURL,
+            preview: true
+        }
+
+        const newEvent = dispatch(createEvent(event, newEventImage, sessionUser, groupId ))
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
             });
-        }else{
-            return dispatch(createEvent(payload))
-                .then(closeModal)
-                .catch(async (res) => {
-                    const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
-                });
 
-        }
+        return history.push(`/events/${newEvent.id}`)
     };
 
+    if(groupId === undefined) return null
     return (
         <div className="create-event-container">
             <img
@@ -112,43 +117,52 @@ function CreateEventModal() {
                 <label>
                     Capacity
                     <input
-                    type ="number"
-                    min="0"
-                    value = {capacity}
-                    onChange ={(e)=>setCapacity(e.target.value)}
-                    placeholder = "0"
-                    step = "1"
+                        type="number"
+                        min="0"
+                        value={capacity}
+                        onChange={(e) => setCapacity(e.target.value)}
+                        placeholder="0"
+                        step="1"
                     />
                 </label>
                 <label>
                     Price
                     <input
-                    type ="number"
-                    min="0"
-                    value = {price}
-                    onChange ={(e)=>setPrice(e.target.value)}
-                    placeholder = "0.00"
-                    step = "0.01"
+                        type="number"
+                        min="0"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        placeholder="0.00"
+                        step="0.01"
                     />
                 </label>
                 <label>
                     Start Date
                     <input
-                    type ="datetime-local"
-                    value = {startDate}
-                    onChange ={(e)=>setStartDate(e.target.value)}
+                        type="datetime-local"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
 
                     />
                 </label>
                 <label>
                     End Date
                     <input
-                    type ="datetime-local"
-                    value = {endDate}
-                    onChange ={(e)=>setEndDate(e.target.value)}
+                        type="datetime-local"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
                     />
                 </label>
+                <label>
+                    Image
+                    <input
+                        type="url"
+                        value={imageURL}
+                        onChange={(e) => setImageURL(e.target.value)}
 
+                        placeholder="https://example.com"
+                    />
+                </label>
 
                 <button type="submit" className="create-event-form-button">Create Event</button>
             </form>

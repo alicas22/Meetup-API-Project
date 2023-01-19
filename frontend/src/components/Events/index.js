@@ -32,7 +32,7 @@ const Events = () => {
     events.length < 1 || groups.length < 1) return null;
   return groups && events && (
     <div className='events-container'>
-  
+
       <h4 className='events-header'>Find events near you</h4>
       <div className='events-list'>
         {events.map((event) => (
@@ -42,8 +42,8 @@ const Events = () => {
               <div className='single-event-text-container'>
                 <div class  className="event-time">{event.startDate}</div>
                 <h2 className='event-name'>{event.name}  </h2>
-                <div className='event-city-state'>{groups[event.groupId].name} - {groups[event.groupId].city}, {groups[event.groupId].state}</div>
-                <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId].private ===true ? 'Private' : "Public"}</div>
+                {/* <div className='event-city-state'>{groups[event.groupId].name} - {groups[event.groupId].city}, {groups[event.groupId].state}</div> */}
+                {/* <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId].private ===true ? 'Private' : "Public"}</div> */}
               </div>
             </div>
           </Link>

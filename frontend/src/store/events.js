@@ -17,10 +17,10 @@ export const loadEvents = (events) => {
 };
 
 
-export const addEvent = (event) => {
+export const addEvent = (newEvent, newSingleEvent) => {
   return {
     type: ADD_EVENT,
-    payload: event,
+    payload: {newEvent, newSingleEvent}
   };
 };
 
@@ -40,12 +40,12 @@ export const remove = (eventId) => {
   };
 };
 
-export const addEventImage = (image, eventId) =>{
-  return {
-    type: ADD_EVENT_IMAGE,
-    payload: {image, eventId}
-  }
-}
+// export const addEventImage = (image, eventId) =>{
+//   return {
+//     type: ADD_EVENT_IMAGE,
+//     payload: {image, eventId}
+//   }
+// }
 
 export const getSingleEvent = (event) =>{
   return{
@@ -65,20 +65,20 @@ export const getSingleEventThunk = (eventId) => async (dispatch) =>{
   }
 }
 
-export const addEventImageThunk = (image, eventId) => async(dispatch) =>{
-  const response = await csrfFetch(`/api/events/${eventId}/images`,{
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(image),
-  })
-  if (response.ok){
-    const data = await response.json();
-    dispatch(addEventImage(data))
-    return data;
-  }
-}
+// export const addEventImageThunk = (image, eventId) => async(dispatch) =>{
+//   const response = await csrfFetch(`/api/events/${eventId}/images`,{
+//     method: 'POST',
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(image),
+//   })
+//   if (response.ok){
+//     const data = await response.json();
+//     dispatch(addEventImage(data))
+//     return data;
+//   }
+// }
 
 export const getEvents = () => async (dispatch) => {
   const response = await csrfFetch("/api/events");
@@ -90,8 +90,8 @@ export const getEvents = () => async (dispatch) => {
 };
 
 
-export const createEvent = (event) => async (dispatch) => {
-  const response = await csrfFetch("/api/events", {
+export const createEvent = (event, image, sessionUser,groupId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/groups/${groupId}/events`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -100,11 +100,25 @@ export const createEvent = (event) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const data = await response.json();
-    dispatch(addEvent(data));
-    return data;
+    const newEvent = await response.json();
+    console.log("newEvent from events store", newEvent)
+    const response2 = await csrfFetch(`api/events/${newEvent.id}/images`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(image),
+  })
+  if (response2.ok){
+    const newImage = await response2.json();
+    const newSingleEvent = {...newEvent}
+    console.log("newImage from events store", newImage)
+    // newSingleEvent[]
+    // newSingleEvent[]
+    dispatch(addEvent(newEvent, newSingleEvent))
   }
 };
+}
 
 
 export const updateEvent = (eventId, event) => async (dispatch) => {
@@ -152,8 +166,9 @@ export const eventsReducer = (state = initialState, action) => {
     }
 
     case ADD_EVENT: {
-      const newState = { ...state };
-      newState.allEvents[action.payload.id] = action.payload;
+      const newState = { ...state, allEvents: { ...state.allEvents }, singleEvent: {} };
+      newState.allGroups[action.payload.newEvent.id] = action.payload.newEvent;
+      newState.singleEvent = action.payload.newSingleEvent
       return newState;
     }
 

@@ -17,7 +17,7 @@ function UpdateGroupModal() {
     const [updateErrors, setUpdateErrors] = useState([]);
     const { closeModal } = useModal();
     const groupId = useSelector(state => state.groups.singleGroup.id)
-    const organizerId = useSelector(state => state.groups.singleGroup.organizerId)
+    const organizerId =useSelector(state => state.groups.singleGroup.organizerId)
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory()
 
@@ -26,23 +26,23 @@ function UpdateGroupModal() {
         e.preventDefault();
         setUpdateErrors([]);
         const group = {
-            name: updateName,
-            about: updateAbout,
-            type: updateType,
-            private: updatePrivated,
-            city: updateCity,
-            state: updateState
+            name:updateName,
+            about:updateAbout,
+            type:updateType,
+            private:updatePrivated,
+            city:updateCity,
+            state:updateState
         }
 
-        dispatch(updateGroup(groupId, group, sessionUser))
-            .then(closeModal)
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setUpdateErrors(data.errors);
-                if (data && organizerId !== sessionUser.id) setUpdateErrors(["You are not authroized to do this operation"]);
-            });
+        const updatedGroup =  dispatch(updateGroup( groupId, group, sessionUser))
+                .then(closeModal)
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setUpdateErrors(data.errors);
+                    if (data && organizerId !== sessionUser.id) setUpdateErrors(["You are not authroized to do this operation"]);
+                });
 
-        return history.push(`/groups/${groupId}`)
+                return history.push(`/groups/${groupId}`)
     };
 
     return (
