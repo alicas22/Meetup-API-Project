@@ -5,7 +5,7 @@ import { getEvents } from '../../store/events.js';
 import { getGroups } from '../../store/groups.js';
 import { useModal } from "../../context/Modal";
 import OpenModalButton from '../Modals/OpenModalButton';
-import CreateEventModal from '../Modals/CreateEventModal'
+
 import './Events.css'
 
 const Events = () => {
@@ -14,6 +14,7 @@ const Events = () => {
   const groups = Object.values(groupsObj)
   const eventsObj = useSelector(state => state.events.allEvents)
   const events = Object.values(eventsObj)
+  const sessionUser = useSelector(state => state.session.user);
 
   events.forEach((event) => {
     if (event.previewImage == "Preview not available" || event.previewImage == null) {
@@ -24,11 +25,39 @@ const Events = () => {
   useEffect(() => {
     dispatch(getEvents())
     dispatch(getGroups())
-  },[dispatch])
+  }, [dispatch])
 
+  console.log("groupsArr from events", groups)
 
+  let groupName
+  let groupCity
+  let groupState
+  const findGroupName = (eventId) => {
+    for (let i = 0; i < groups.length; i++) {
+      if (groups[i].id === eventId) {
+        groupName = groups[i].name
+      }
+    }
+    return groupName
+  }
+  const findGroupCity = (eventId) => {
+    for (let i = 0; i < groups.length; i++) {
+      if (groups[i].id === eventId) {
+        groupCity = groups[i].city
+      }
+    }
+    return groupCity
+  }
+  const findGroupState = (eventId) => {
+    for (let i = 0; i < groups.length; i++) {
+      if (groups[i].id === eventId) {
+        groupState = groups[i].state
+      }
+    }
+    return groupName
+  }
 
-  if (!events.length|| !groups.length ||
+  if (!events.length || !groups.length ||
     events.length < 1 || groups.length < 1) return null;
   return groups && events && (
     <div className='events-container'>
@@ -40,10 +69,10 @@ const Events = () => {
             <div className="single-event-container" >
               <img src={event.previewImage} alt={event.name} className="events-preview-image"></img>
               <div className='single-event-text-container'>
-                <div class  className="event-time">{event.startDate}</div>
+                <div class className="event-time">{event.startDate}</div>
                 <h2 className='event-name'>{event.name}  </h2>
-                <div className='event-city-state'>{groups[event.groupId-1]?.name} - {groups[event.groupId-1]?.city}, {groups[event.groupId-1]?.state}</div>
-                <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId]?.private ===true ? 'Private' : "Public"}</div>
+                <div className='event-city-state'> {findGroupName(event.id)} - {findGroupCity(event.id)}, {findGroupState(event.id)}</div>
+                <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId]?.private === true ? 'Private' : "Public"}</div>
               </div>
             </div>
           </Link>

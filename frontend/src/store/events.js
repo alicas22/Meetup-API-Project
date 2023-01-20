@@ -114,8 +114,6 @@ export const createEvent = (event, image, sessionUser,groupId) => async (dispatc
     const newImage = await response2.json();
     const newSingleEvent = {...newEvent}
     newSingleEvent['EventImages']=newImage
-    console.log("newEvent from events store", newEvent.id)
-    console.log("newSingleEvent from events store", newSingleEvent)
     // newSingleEvent[]
     dispatch(addEvent(newEvent, newSingleEvent))
     return newEvent
