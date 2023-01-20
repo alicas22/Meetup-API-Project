@@ -53,7 +53,7 @@ const Events = () => {
 
   const formatStartDate = (eventDate) => {
     const date = formatDate(eventDate)
-    const startDate = `${date.dayName}, ${date.shortMonth} ${date.time}`
+    const startDate = `${date.shortDayName}, ${date.shortMonth} ${date.time}`
     return startDate
   }
 
