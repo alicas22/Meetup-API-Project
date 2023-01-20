@@ -13,6 +13,7 @@ const EventDetails = () => {
     const { eventId } = useParams()
     const event = useSelector(state => state.events.singleEvent)
     const group = useSelector(state => state.groups.singleGroup)
+    const sessionUser = useSelector(state => state.session.user);
 
     const asyncEventGet = async()=> {
         const singleEvent = await dispatch(getSingleEventThunk(eventId))
@@ -23,9 +24,15 @@ const EventDetails = () => {
 
     useEffect(() => {
         asyncEventGet()
-    }, [dispatch])
+    }, [dispatch, sessionUser])
 
     if (!event.id && !group.id) return null
+
+    if (!sessionUser) return (
+        <div style={{textAlign:'center'}}>
+            <h1>You must login to view Details</h1>
+        </div>
+    )
     return group.Organizer && event.Venue &&(
         <div className="event-details-container">
             <div className="event-details-header-container">
