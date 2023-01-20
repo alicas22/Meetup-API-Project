@@ -40,7 +40,7 @@ function UpdateGroupModal(props) {
                 closeModal()
             })
             .catch(async (res) => {
-                const data = await res.json;
+                const data = await res.json();
                 if (data && data.errors) setUpdateErrors(data.errors);
                 if (data && organizerId !== sessionUser.id) setUpdateErrors(["You are not authorized to do this operation"]);
             })

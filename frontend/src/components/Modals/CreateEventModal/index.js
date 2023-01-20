@@ -50,7 +50,7 @@ function CreateEventModal() {
                 closeModal()
             })
             .catch(async (res) => {
-                const data = await res.json;
+                const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
                 if (data && group.organizerId !== sessionUser.id) setErrors(["You are not authorized to do this operation"]);
             });
@@ -79,9 +79,9 @@ function CreateEventModal() {
                     value={venueId}
                 >
                     <option value='' disable selected>Select an venue...</option>
-                    <option value='1'>1: test venue 1</option>
-                    <option value='2'>2: test venue 2</option>
-                    <option value='3'>3: test venue 3</option>
+                    <option value='1'>1: 123 Make Believe Way</option>
+                    <option value='2'>2: 54321 This Aint Real St</option>
+                    <option value='3'>3: 21 Whos Asking Blvd</option>
                 </select>
                 <label>
                     Name

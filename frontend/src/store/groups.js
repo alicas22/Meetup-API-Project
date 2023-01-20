@@ -102,7 +102,7 @@ export const createGroup = (group, image, sessionUser) => async (dispatch) => {
     },
     body: JSON.stringify(group),
   });
-
+ 
   if (response.ok) {
     const newGroup = await response.json();
 
@@ -120,11 +120,11 @@ export const createGroup = (group, image, sessionUser) => async (dispatch) => {
       newGroup['previewImage'] = newImage.url
       newSingleGroup['Organizer'] = sessionUser
       newSingleGroup['GroupImages'] = [newImage]
-
       dispatch(addGroup(newGroup, newSingleGroup))
       return newGroup
     }
   }
+  return response
 };
 
 

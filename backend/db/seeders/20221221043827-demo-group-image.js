@@ -10,18 +10,18 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         groupId:1,
-        url:'https://images.pexels.com/photos/1154189/pexels-photo-1154189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        url:'https://images.pexels.com/photos/1835718/pexels-photo-1835718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         preview: true
       },
       {
         groupId:2,
-        url:'https://images.pexels.com/photos/8111367/pexels-photo-8111367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        url:'https://images.pexels.com/photos/3359734/pexels-photo-3359734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         preview:true
       },
       {
         groupId:3,
-        url:'https://images.pexels.com/photos/2220422/pexels-photo-2220422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        preview:false
+        url:'https://images.pexels.com/photos/10855503/pexels-photo-10855503.jpeg?auto=compress&cs=tinysrgb&w=1600',
+        preview:true
       }
     ], {});
   },
@@ -30,7 +30,7 @@ module.exports = {
     options.tableName = 'GroupImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      url: { [Op.in]: ['https://images.pexels.com/photos/1154189/pexels-photo-1154189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/8111367/pexels-photo-8111367.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/2220422/pexels-photo-2220422.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'] }
+      url: { [Op.in]: ['https://images.pexels.com/photos/1835718/pexels-photo-1835718.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/3359734/pexels-photo-3359734.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/10855503/pexels-photo-10855503.jpeg?auto=compress&cs=tinysrgb&w=1600'] }
     }, {});
   }
 };

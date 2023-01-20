@@ -28,8 +28,7 @@ function CreateGroupModal() {
             type,
             private: privated,
             city,
-            state
-        }
+            state        }
 
         const newGroupImage = {
             url: imageURL,
@@ -37,12 +36,14 @@ function CreateGroupModal() {
         }
         return dispatch(createGroup(group, newGroupImage, sessionUser))
             .then((newGroup) => {
-                history.push(`/groups/${newGroup.id}`)
                 closeModal()
+                history.push(`/groups/${newGroup.id}`)
             })
             .catch(async (res) => {
-                const data = await res.json;
+                const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);
+                console.log("data from createGroup", data)
+                console.log("data.errors from createGroup", data.errors)
             })
 
 
