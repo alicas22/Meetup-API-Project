@@ -7,6 +7,7 @@ import DeleteEventModal from "../Modals/DeleteEventModal"
 import { Link } from 'react-router-dom'
 import './EventDetails.css'
 import OpenModalButton from '../Modals/OpenModalButton/index.js';
+import formatDate from '../../utils/formatDate.js';
 
 const EventDetails = () => {
     const dispatch = useDispatch()
@@ -25,6 +26,13 @@ const EventDetails = () => {
     useEffect(() => {
         asyncEventGet()
     }, [dispatch, sessionUser])
+
+
+    const formattedDate = (eventDate) => {
+        const dateObj = formatDate(eventDate)
+        const date = `${dateObj.dayName}, ${dateObj.month} ${dateObj.year} at ${dateObj.time}`
+        return date
+      }
 
     if (!event.id && !group.id) return null
 
@@ -74,7 +82,7 @@ const EventDetails = () => {
                         </Link>
                         <div className="event-info-time-date-location">
                             <div className="clock-date-time"><i className="fa-regular fa-clock" />
-                                <p className="event-details-text-indent"> Time and Date</p></div>
+                                <p className="event-details-text-indent"> {formattedDate(event.startDate)} to {formattedDate(event.endDate)}</p></div>
                             <div className="event-details-venue-location"><i className="fa-solid fa-location-dot" />
                                 <p className="event-details-text-indent">  {event.Venue?.address}, {event.Venue?.city}, {event.Venue?.state}</p>
                             </div>

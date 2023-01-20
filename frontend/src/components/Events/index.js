@@ -5,6 +5,7 @@ import { getEvents } from '../../store/events.js';
 import { getGroups } from '../../store/groups.js';
 import { useModal } from "../../context/Modal";
 import OpenModalButton from '../Modals/OpenModalButton';
+import formatDate from '../../utils/formatDate.js';
 
 import './Events.css'
 
@@ -50,15 +51,21 @@ const Events = () => {
     return groupState
   }
 
+  const formatStartDate = (eventDate) => {
+    const date = formatDate(eventDate)
+    const startDate = `${date.dayName}, ${date.shortMonth} ${date.time}`
+    return startDate
+  }
+
   if (!events.length || !groups.length ||
     events.length < 1 || groups.length < 1) return null;
 
-  let eventHeaderText = "Find events near you" ;
+  let eventHeaderText = "Find events near you";
   let isLoggedIn = false
 
-  if(sessionUser) isLoggedIn = true
+  if (sessionUser) isLoggedIn = true
 
-  if(isLoggedIn === false){
+  if (isLoggedIn === false) {
     eventHeaderText = "Find events near you " + "(You must login to view details)"
   }
 
@@ -73,7 +80,7 @@ const Events = () => {
             <div className="single-event-container" >
               <img src={event.previewImage} alt={event.name} className="events-preview-image"></img>
               <div className='single-event-text-container'>
-                <div class className="event-time">{event.startDate}</div>
+                <div class className="event-time">{formatStartDate(event.startDate)}</div>
                 <h2 className='event-name'>{event.name}  </h2>
                 <div className='event-city-state'> {findGroupName(event.id)} - {findGroupCity(event.id)}, {findGroupState(event.id)}</div>
                 <div className='event-attendees'>{event.numAttending} attendees &#x2022; {groups[event.groupId]?.private === true ? 'Private' : "Public"}</div>
