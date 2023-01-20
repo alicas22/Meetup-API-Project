@@ -43,22 +43,22 @@ const validateEvent = [
         .withMessage("Venue does not exist"),
     check('name')
         .exists({ checkFalsy: true })
-        .isLength({ min: 5 })
-        .withMessage("Name must be at least 5 characters"),
+        .isLength({ min: 4 })
+        .withMessage("Name must be at least 4 characters"),
     check('type')
         .exists({ checkFalsy: true })
         .isIn(['Online', 'In person'])
         .withMessage(`Type must be 'Online' or 'In person'`),
     check('capacity')
         .isInt({ min: 1 })
-        .withMessage('Capacity must be an integer'),
+        .withMessage('Capacity must be an integer greater than 0'),
     check('price')
         .isFloat({ min: 0 })
         .withMessage("Price is invalid"),
     check('description')
         .exists({ checkFalsy: true })
         .isLength({ min: 10 })
-        .withMessage("Description is required"),
+        .withMessage("Description must be 10 characters or more"),
     check('startDate')
         .custom(async value => {
             if (Date.parse(value) < Date.now()) return Promise.reject()

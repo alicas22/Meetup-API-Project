@@ -15,7 +15,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const credential = 'test'
+  const credential = 'JohnSmith'
   const password = 'password'
 
   const handleSubmit = (e) => {

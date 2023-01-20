@@ -15,7 +15,39 @@ module.exports = {
 
       },
       {
+        eventId: 1,
+        userId: 2,
+        status: 'not attending'
+      },
+      {
+        eventId: 1,
+        userId: 3,
+        status: 'pending'
+      },
+      {
         eventId: 2,
+        userId: 1,
+        status: 'attending'
+
+      },
+      {
+        eventId: 2,
+        userId: 2,
+        status: 'not attending'
+      },
+      {
+        eventId: 2,
+        userId: 3,
+        status: 'pending'
+      },
+      {
+        eventId: 3,
+        userId: 1,
+        status: 'attending'
+
+      },
+      {
+        eventId: 3,
         userId: 2,
         status: 'not attending'
       },

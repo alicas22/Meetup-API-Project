@@ -10,18 +10,18 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         eventId:1,
-        url:'https://images.pexels.com/photos/1146358/pexels-photo-1146358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        url:'https://blackbeltmag.com/media-library/muay-thai.png?id=29903923&width=1245&height=700&quality=85&coordinates=0%2C61%2C0%2C65',
         preview: true
       },
       {
         eventId:2,
-        url: 'https://images.pexels.com/photos/509236/pexels-photo-509236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        url: 'https://www.mccy.gov.sg/kaya/-/media/Kaya/community/dungeons-and-dragons/DnD-04.jpg',
         preview: true
       },
       {
         eventId:3,
-        url:'https://images.pexels.com/photos/13064130/pexels-photo-13064130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        preview: false
+        url:'https://cdn.shortpixel.ai/spai/q_lossy+w_1082+to_webp+ret_img/https://beachvolleyball.com.au/wp-content/uploads/2021/12/beach-play2.jpg',
+        preview: true
       }
 
     ], {});
@@ -31,7 +31,7 @@ module.exports = {
     options.tableName = 'EventImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      url: { [Op.in]: ['https://images.pexels.com/photos/1146358/pexels-photo-1146358.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/509236/pexels-photo-509236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'https://images.pexels.com/photos/13064130/pexels-photo-13064130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'] }
+      url: { [Op.in]: ['https://blackbeltmag.com/media-library/muay-thai.png?id=29903923&width=1245&height=700&quality=85&coordinates=0%2C61%2C0%2C65', 'https://www.mccy.gov.sg/kaya/-/media/Kaya/community/dungeons-and-dragons/DnD-04.jpg', 'https://cdn.shortpixel.ai/spai/q_lossy+w_1082+to_webp+ret_img/https://beachvolleyball.com.au/wp-content/uploads/2021/12/beach-play2.jpg'] }
     }, {});
   }
 };
