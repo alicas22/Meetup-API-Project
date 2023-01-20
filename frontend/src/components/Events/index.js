@@ -54,7 +54,7 @@ const Events = () => {
         groupState = groups[i].state
       }
     }
-    return groupName
+    return groupState
   }
 
   if (!events.length || !groups.length ||
