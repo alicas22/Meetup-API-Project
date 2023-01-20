@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 // import './UpdateGroup.css';
 import { deleteGroup } from "../../../store/groups";
+import { getEvents } from "../../../store/events";
 
 
 function DeleteGroupModal() {
@@ -24,6 +25,7 @@ function DeleteGroupModal() {
 
         dispatch(deleteGroup(groupId))
             .then(() => {
+                dispatch(getEvents())
                 closeModal()
                 history.push('/groups')
             })
