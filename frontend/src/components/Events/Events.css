@@ -30,8 +30,9 @@
 }
 
 .event-name{
-    line-height: 0;
-    color: black
+
+    color: black;
+
 }
 
 .event-city-state,
