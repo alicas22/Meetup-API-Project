@@ -56,7 +56,7 @@ function LoginFormModal() {
         </div>
             <br />
         <label>
-          Email
+          Username
           <input
             type="text"
             value={credential}
