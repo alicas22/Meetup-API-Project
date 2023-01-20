@@ -13,12 +13,19 @@ const GroupDetails = () => {
     const dispatch = useDispatch()
     const { groupId } = useParams()
     const group = useSelector((state => state.groups.singleGroup))
+    const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getSingleGroupThunk(groupId))
-    }, [dispatch])
+    }, [dispatch, sessionUser])
 
     if (group === undefined) return null
+
+    if (!sessionUser) return (
+        <div style={{textAlign:'center'}}>
+            <h1>You must login to view Details</h1>
+        </div>
+    )
     return group && (
         <div className="group-details-container">
             <div className='group-details-header'>
