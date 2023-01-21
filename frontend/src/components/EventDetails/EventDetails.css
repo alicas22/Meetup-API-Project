@@ -22,10 +22,14 @@
     flex-direction: row;
 }
 
-.event-details-text-indent {
-    padding-left:5px;
-}
+/* .event-details-text-indent>p {
 
+} */
+
+.fa-clock,
+.fa-location-dot{
+    padding-right: 15px;
+}
 
 .event-details-modals-container {
     display: flex;
@@ -118,7 +122,9 @@
 .event-details-venue-location{
     display:flex;
     align-items: center;
-    height:3rem
+    /* height:50px; */
+
+
 }
  .fa-users-rectangle{
     font-size: xx-large;

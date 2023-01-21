@@ -102,7 +102,7 @@ export const createGroup = (group, image, sessionUser) => async (dispatch) => {
     },
     body: JSON.stringify(group),
   });
- 
+
   if (response.ok) {
     const newGroup = await response.json();
 
@@ -190,6 +190,11 @@ export const groupsReducer = (state = initialState, action) => {
     case DELETE_GROUP: {
       const newState = { ...state, allGroups: { ...state.allGroups } };
       delete newState.allGroups[action.payload];
+      // const newState = {...state}
+      // const copyState = { ...newState.allGroups}
+      // delete copyState[action.groupId]
+      // newState.allGroups = copyState;
+      // newState.singleGroup = {}
       return newState;
     }
     case ADD_GROUP_IMAGE: {

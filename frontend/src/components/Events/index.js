@@ -16,11 +16,13 @@ const Events = () => {
   const eventsObj = useSelector(state => state.events.allEvents)
   const events = Object.values(eventsObj)
   const sessionUser = useSelector(state => state.session.user);
+  // const [isLoaded, setIsLoaded] = useState(false)
+
 
 
   useEffect(() => {
-    dispatch(getEvents())
     dispatch(getGroups())
+    dispatch(getEvents())
   }, [dispatch])
 
   let groupName
@@ -57,14 +59,13 @@ const Events = () => {
     return startDate
   }
 
-  if (!events.length || !groups.length ||
-    events.length < 1 || groups.length < 1) return null;
+  // if (!events.length || !groups.length ||
+  //   events.length < 1 || groups.length < 1) return null;
 
   let eventHeaderText = "Find events near you";
   let isLoggedIn = false
 
   if (sessionUser) isLoggedIn = true
-
   if (isLoggedIn === false) {
     eventHeaderText = "Find events near you " + "(You must login to view details)"
   }
@@ -90,7 +91,7 @@ const Events = () => {
         ))}
       </div>
     </div>
-  );
+  )
 };
 
 export default Events;
