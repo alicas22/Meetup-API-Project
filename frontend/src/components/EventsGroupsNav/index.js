@@ -4,7 +4,7 @@ import './EventsGroupsNav.css'
 
 
 function EventsGroupsNav() {
- 
+
 
 
     return (

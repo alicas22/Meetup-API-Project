@@ -146,6 +146,7 @@ export const deleteEvent = (eventId) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
+    console.log('eventID from deleteEventThunk', eventId)
     dispatch(remove(eventId));
     return data;
   }
@@ -159,11 +160,18 @@ const initialState = {
 export const eventsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_EVENTS: {
-      const newState = {...state}
-      action.payload.Events.forEach((event) => {
-        newState.allEvents[event.id] = event;
+      const eventsObj = {};
+      action.payload.Events.forEach(event => {
+          eventsObj[event.id] = event;
       });
+      const newState = { ...state };
+      newState.allEvents = { ...eventsObj };
       return newState;
+      // const newState = {...state}
+      // action.payload.Events.forEach((event) => {
+      //   newState.allEvents[event.id] = event;
+      // });
+      // return newState;
     }
 
     case ADD_EVENT: {
@@ -182,6 +190,12 @@ export const eventsReducer = (state = initialState, action) => {
     case DELETE_EVENT: {
       const newState = { ...state, allEvents:{...state.allEvents} };
       delete newState.allEvents[action.payload];
+      // const newState= {...state}
+      // const copyState = {...newState.allEvents}
+      // delete copyState.allEvents[action.eventId];
+      // newState.allEvents = copyState
+      // newState.singleEvent = {}
+      console.log('newState from events reducer', newState)
       return newState;
     }
     case ADD_EVENT_IMAGE: {

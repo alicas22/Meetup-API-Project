@@ -7,6 +7,7 @@ import CreateEventModal from '../Modals/CreateEventModal/index.js';
 import UpdateGroupModal from '../Modals/UpdateGroupModal/index.js';
 import DeleteGroupModal from '../Modals/DeleteGroupModal/index.js';
 import OpenModalButton from '../Modals/OpenModalButton/index.js';
+import GroupDetailsNavBar from './GroupDetailsNavBar.js';
 import './GroupDetails.css'
 
 const GroupDetails = () => {
@@ -66,12 +67,13 @@ const GroupDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className='group-details-center-divider'>About</div>
+            <GroupDetailsNavBar />
+            {/* <div className='group-details-center-divider'>About</div>
             <div className='group-details-body'>
                 <div className='group-details-about-text'>
                     {group.about}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

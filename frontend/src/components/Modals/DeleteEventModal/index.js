@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
 import { getGroups, getSingleGroupThunk } from "../../../store/groups";
-import { deleteEvent } from "../../../store/events";
+import { deleteEvent, getEvents } from "../../../store/events";
 import { useParams } from 'react-router-dom'
 
 function DeleteEventModal() {
@@ -36,7 +36,7 @@ function DeleteEventModal() {
                 const data = await res.json();
                 if (data && (organizerId !== sessionUser.id)) setErrors(["You are not authorized to do this operation"]);
             })
-            
+
     };
     if(!organizerId) return null
     return (

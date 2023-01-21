@@ -1,7 +1,15 @@
 const formatDate = (date) => {
     let formattedDate = new Date(date)
     formattedDate = formattedDate.toString().split(" ")
-    const dayName = formattedDate[0] + 'day'
+    let shortDayName = formattedDate[0]
+    let dayName = formattedDate[0]
+    if(dayName === "Mon") dayName = "Monday"
+    if(dayName === "Tue") dayName = "Tuesday"
+    if(dayName === "Wed") dayName = "Wednesday"
+    if(dayName === "Thu") dayName = "Thursday"
+    if(dayName === "Fri") dayName = "Friday"
+    if(dayName === "Sat") dayName = "Saturday"
+    if(dayName === "Sun") dayName = "Sunday"
     let month = formattedDate[1]
     if (month === 'Jan') month = 'January'
     if (month === 'Feb') month = 'February'
@@ -35,7 +43,7 @@ const formatDate = (date) => {
 
     const shortMonth = formattedDate[1].toUpperCase()
 
-    const timeObj = { dayName, month, day, year, time, shortMonth }
+    const timeObj = { dayName, month, day, year, time, shortMonth, shortDayName }
     return timeObj
 }
 

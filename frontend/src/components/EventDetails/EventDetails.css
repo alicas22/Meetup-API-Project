@@ -8,6 +8,7 @@
 
 .event-details-header-container {
     width: 80%
+
 }
 
 .event-details-name {
@@ -21,10 +22,14 @@
     flex-direction: row;
 }
 
-.event-details-text-indent {
-    padding-left:5px
-}
+/* .event-details-text-indent>p {
 
+} */
+
+.fa-clock,
+.fa-location-dot{
+    padding-right: 15px;
+}
 
 .event-details-modals-container {
     display: flex;
@@ -77,14 +82,16 @@
 .event-details-info-card {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     height: 50%;
     width: 80%;
 
 }
 
 .event-details-group-info-event-info-container {
-    margin-left: 2rem
+    margin-left: 2rem;
+    /* background-color:yellow; */
+    width:500px;
 }
 
 .event-details-group-image {
@@ -115,7 +122,9 @@
 .event-details-venue-location{
     display:flex;
     align-items: center;
-    /* line-height:1px; */
+    /* height:50px; */
+
+
 }
  .fa-users-rectangle{
     font-size: xx-large;

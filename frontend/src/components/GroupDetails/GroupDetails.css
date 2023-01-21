@@ -34,13 +34,15 @@
     align-items:start;
     padding-left:30px;
     line-height: 2rem;
+    max-width: 60%;
  }
 
  .group-details-city-state,
  .group-details-members-info,
  .group-details-organized-by{
     color:#212121;
-    line-height:2rem
+    /* line-height:2rem; */
+    
  }
 
  .group-details-name{
@@ -50,6 +52,7 @@
 
  .group-details-indent1{
     padding-left: 1rem;
+
  }
  .group-details-indent2{
     padding-left: 1rem;
