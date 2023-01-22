@@ -180,7 +180,6 @@ export const groupsReducer = (state = initialState, action) => {
     }
 
     case UPDATE_GROUP: {
-      // const newState = { ...state, allGroups: { ...state.allGroups } };
       const newState = { ...state };
       newState.groups = { ...state.groups, [action.payload.id]: action.payload }
       newState.singleGroup = { ...newState.singleGroup, ...action.payload }

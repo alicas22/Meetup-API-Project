@@ -195,7 +195,6 @@ export const eventsReducer = (state = initialState, action) => {
       // delete copyState.allEvents[action.eventId];
       // newState.allEvents = copyState
       // newState.singleEvent = {}
-      console.log('newState from events reducer', newState)
       return newState;
     }
     case ADD_EVENT_IMAGE: {

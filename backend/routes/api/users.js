@@ -18,11 +18,11 @@ const validateSignup = [
   check('firstName')
     .exists({ checkFalsy: true })
     .isLength({ min: 2 })
-    .withMessage('First name is required.'),
+    .withMessage('First name is required with at least 2 characters.'),
   check('lastName')
     .exists({ checkFalsy: true })
     .isLength({ min: 2 })
-    .withMessage('Last name is required.'),
+    .withMessage('Last name is required with at least 2 characters.'),
   check('username')
     .not()
     .isEmail()
@@ -52,14 +52,15 @@ router.post(
     const user = await User.signup({ firstName, lastName, email, username, password });
 
     user.toJSON()
-    // const token = await setTokenCookie(res, user);  OPTIONAL TOKEN
+    const token = await setTokenCookie(res, user);  //OPTIONAL TOKEN
+
     return res.json({
       id: user.id,
       firstName,
       lastName,
       email,
       username,
-      // token: token
+      token: token
     }
     );
   }

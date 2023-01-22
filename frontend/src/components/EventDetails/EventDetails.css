@@ -4,10 +4,24 @@
     justify-content: start;
     align-items: center;
     border-top: 1px solid rgb(238, 238, 238);
+    min-height: 110vh;
+
+
+}
+
+#event-background-color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+
+
 }
 
 .event-details-header-container {
-    width: 80%
+    width: 80%;
+
 
 }
 
@@ -20,15 +34,180 @@
 .event-details-hosted-by {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
-/* .event-details-text-indent>p {
+.fa-users-rectangle {
+    font-size: xx-large;
+    padding-right: 15px;
+}
 
-} */
+
+
+
+
+.event-details-border {
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgb(238, 238, 238);
+
+}
+
+.event-details-under-border {
+    width: 100%;
+    background-color: rgb(242, 242, 242);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 300px;
+    /* min-height: 100vw; */
+
+}
+
+.event-details-main-body {
+    width: 80%;
+
+}
+
+.event-details-image-card-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.event-details-image {
+    height: 350px;
+    width: 550px;
+    object-fit: cover;
+    border: 10px;
+
+}
 
 .fa-clock,
-.fa-location-dot{
+.fa-location-dot {
     padding-right: 15px;
+}
+
+/*FIX THIS TO FIX YOUR CARDS*/
+
+.event-details-group-info-event-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    /* background-color: yellow; */
+    margin-left: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    max-width: 40%;
+    position:sticky
+}
+
+.event-details-group-link {
+    background-color: white;
+    padding: 20px;
+    border-radius: 1rem;
+    min-width: 250px;
+    max-width: 500px;
+    color: black;
+    cursor: pointer;
+}
+
+.event-details-info-card-content {
+    display: flex;
+    flex: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.event-details-group-image {
+    width: 100px;
+    height: 100px;
+    border-radius: .5rem;
+    object-fit: cover;
+    margin-right: 10px
+}
+
+.event-details-info-card-group-info{
+    font-weight: bold;
+    font-size: 16px;
+}
+.event-details-info-card-group-private{
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.event-info-time-date-location {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 20px;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 20px;
+    border-radius: 1rem;
+    min-width: 250px;
+    max-width: 500px;
+    font-size: 14px;
+
+}
+
+.event-info-time-date-location-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+
+}
+
+.clock-date-time,
+.event-details-venue-location {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/*details start here*/
+
+.event-details-about-details {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+/* .event-details-bottom-filler{
+    height: 200px;
+} */
+
+#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    background-color: white;
+
+}
+
+.footer-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px;
+    width: 90%;
+}
+
+.footer-event-name {
+    font-weight: bold;
 }
 
 .event-details-modals-container {
@@ -36,6 +215,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: flex-end;
+    padding-right: 25px;
 }
 
 
@@ -54,83 +234,86 @@
     text-align: center;
 }
 
-.event-details-border {
-    width: 100%;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid rgb(238, 238, 238);
-
-}
-
-.event-details-main-body {
-    width: 90%;
-}
-
-.event-details-image-card-container {
+/*backup formatting
+/* .event-details-info-card {
     display: flex;
-    flex-direction: row;
-
-}
-
-.event-details-image {
-    height: 350px;
-    width: 550px;
-    object-fit: cover;
-
-    margin-top: 2rem;
-}
-
-.event-details-info-card {
-    display: flex;
+    width: auto;
     flex-direction: row;
     justify-content: start;
     height: 50%;
-    width: 80%;
+    border: 1px solid black;
+    background-color: white;
 
-}
+} */
+/* .event-details-group-info-event-info-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 2rem;
+        width: 100%
+    }
 
-.event-details-group-info-event-info-container {
-    margin-left: 2rem;
-    /* background-color:yellow; */
-    width:500px;
-}
-
-.event-details-group-image {
-    width: 100px;
-    height: 100px;
-    border-radius: .5rem;
-    margin-top: 2rem;
-    object-fit: cover;
-
-}
-
-
-.event-details-info-card-group-info {
-    margin-top: 2rem;
-    margin-left: 1rem;
-    font-weight: bold;
-    color: black
-}
-
-.event-details-info-card-group-private {
-    font-weight: 100;
-    font-size: 15px;
-    padding-top: 2rem;
-    color: grey
-}
-
-.clock-date-time,
-.event-details-venue-location{
-    display:flex;
-    align-items: center;
-    /* height:50px; */
+    .event-details-group-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        border-radius: 1rem;
+        background-color: white;
+        padding: 0;
+        border: 0;
+        margin: 0;
+    }
 
 
-}
- .fa-users-rectangle{
-    font-size: xx-large;
- }
-.event-details-hosted-by{
-    display:flex;
-    align-items: center;
-    line-height: 1rem;
-}
+
+    .event-details-info-card-content {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    .event-details-group-image {
+        width: 100px;
+        height: 100px;
+        border-radius: .5rem;
+        object-fit: cover;
+    }
+
+
+    .event-details-info-card-group-info {
+        width: auto;
+        margin-left: 1rem;
+        font-weight: bold;
+        color: black
+
+    }
+
+    .event-details-info-card-group-private {
+        font-weight: 100;
+        font-size: 15px;
+        color: grey
+    }
+
+    .event-info-time-date-location {
+        background-color: white;
+        border-radius: 1rem;
+        margin-top: 10px;
+        width:auto;
+        max-width:60%
+    }
+    .event-info-time-date-location-content {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+
+    .clock-date-time,
+    .event-details-venue-location {
+        display: flex;
+        align-items: center;
+    } */

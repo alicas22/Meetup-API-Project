@@ -89,7 +89,7 @@ function CreateEventModal() {
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        required
+                        // required
                     />
                 </label>
                 <label>
@@ -159,7 +159,7 @@ function CreateEventModal() {
                         type="url"
                         value={imageURL}
                         onChange={(e) => setImageURL(e.target.value)}
-
+                        required
                         placeholder="https://example.com"
                     />
                 </label>

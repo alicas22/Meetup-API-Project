@@ -14,13 +14,8 @@ function DeleteGroupModal() {
     const groupId = useSelector(state => state.groups.singleGroup.id)
     const organizerId = useSelector(state => state.groups.singleGroup.organizerId)
     const sessionUser = useSelector(state => state.session.user);
-    // const eventsObj = useSelector(state => state.events.allEvents)
-    // const events = Object.values(eventsObj)
     const history = useHistory()
 
-    // useEffect(() => {
-    //     dispatch(getEvents())
-    //   }, [dispatch])
 
 
     const handleSubmit = (e) => {
@@ -28,7 +23,7 @@ function DeleteGroupModal() {
         setErrors([]);
 
         dispatch(deleteGroup(groupId))
-        // .then(()=>dispatch(getEvents()))
+        .then(()=>dispatch(getEvents()))
             .then(() => {
                 closeModal()
                 history.push('/groups')

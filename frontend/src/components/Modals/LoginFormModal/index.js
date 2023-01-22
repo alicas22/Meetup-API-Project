@@ -46,13 +46,14 @@ function LoginFormModal() {
         </ul>
 
         <div className="login-form-signup">
-          <span>
+          <span >
             Not a member yet?</span>
+            <span style = {{cursor:'pointer'}}>
             <OpenLoginModal className = "login-form-signup-link"
             buttonText="Sign Up"
             modalComponent={<SignupFormModal />}
-
             />
+            </span>
         </div>
             <br />
         <label>

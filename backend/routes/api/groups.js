@@ -1,4 +1,4 @@
-// backend/routes/api/session.js
+
 const express = require('express');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -10,15 +10,15 @@ const router = express.Router();
 
 const validateCreation = [
     check('name')
-        .exists({ checkFalsy: true })
-        .isLength({ max: 60 })
-        .withMessage('Name must be 60 characters or less'),
+        // .exists({ checkFalsy: true })
+        .isLength({min:2, max:60})
+        .withMessage('Name must be between 2 and 60 characters'),
     check('about')
         .exists({ checkFalsy: true })
         .isLength({ min: 50 })
         .withMessage('About must be 50 characters or more'),
     check('type')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isIn(['Online', 'In person'])
         .withMessage(`Type must be 'Online' or 'In person'`),
     check('private')
@@ -26,10 +26,10 @@ const validateCreation = [
         .withMessage('Private must be a boolean'),
     check('city')
         .isLength({ min: 2 })
-        .withMessage('City is required'),
+        .withMessage('City must be 2 characters or more'),
     check('state')
         .isLength({ min: 2 })
-        .withMessage('State is required'),
+        .withMessage('State must be 2 characters or more'),
     handleValidationErrors
 ];
 

@@ -16,7 +16,7 @@ const EventDetails = () => {
     const group = useSelector(state => state.groups.singleGroup)
     const sessionUser = useSelector(state => state.session.user);
 
-    const asyncEventGet = async()=> {
+    const asyncEventGet = async () => {
         const singleEvent = await dispatch(getSingleEventThunk(eventId))
         if (singleEvent) {
             dispatch(getSingleGroupThunk(singleEvent.groupId))
@@ -32,27 +32,83 @@ const EventDetails = () => {
         const dateObj = formatDate(eventDate)
         const date = `${dateObj.dayName}, ${dateObj.month} ${dateObj.year} at ${dateObj.time}`
         return date
-      }
+    }
+    const shortFormattedDate = (eventDate) => {
+        const dateObj = formatDate(eventDate)
+        const date = `${dateObj.shortDayName}, ${dateObj.shortMonth} ${dateObj.day} ${dateObj.time}`
+        return date;
+    }
 
     if (!event.id && !group.id) return null
 
     if (!sessionUser) return (
-        <div style={{textAlign:'center'}}>
+        <div style={{ textAlign: 'center' }}>
             <h1>You must login to view Details</h1>
         </div>
     )
-    return group.Organizer && event.Venue &&(
+    return group.Organizer && event.Venue && (
         <div className="event-details-container">
-            <div className="event-details-header-container">
-                <h1 className="event-details-name">
-                    {event.name}
-                </h1>
-                <div className="event-details-hosted-by">
-                    <i className="fa-solid fa-users-rectangle"></i>
-                    <div className="event-details-hosted-by-text">
-                        <div className="event-details-text-indent">Hosted by:</div>
-                        <div className="event-details-text-indent"> {group.Organizer?.firstName} </div>
+            <div id="event-background-color">
+                <div className="event-details-header-container">
+                    <h1 className="event-details-name">
+                        {event.name}
+                    </h1>
+                    <div className="event-details-hosted-by">
+                        <i className="fa-solid fa-users-rectangle"></i>
+                        <div className="event-details-hosted-by-text">
+                            <div className="event-details-text-indent">Hosted by:</div>
+                            <div className="event-details-text-indent"> {group.Organizer?.firstName} </div>
+                        </div>
                     </div>
+
+                </div>
+            </div>
+            <div className="event-details-border"></div>
+            <div className="event-details-under-border">
+                <div className="event-details-main-body">
+                    <div className="event-details-image-card-container">
+                        <div className="event-details-image-container">
+                            {event.EventImages && (<img src={event.EventImages[0]?.url} className="event-details-image" />)}
+                        </div>
+                        <div className="event-details-group-info-event-info-container">
+                            <Link to={`/groups/${group.id}`} style={{ textDecoration: 'none' }} className='event-details-group-link'>
+                                <div className="event-details-info-card">
+                                    <div className="event-details-info-card-content">
+                                        <img src={group.GroupImages[0].url} alt="" className="event-details-group-image" />
+                                        <div className="event-details-info-card-group-info">
+                                            {group.name}
+                                            <div className="event-details-info-card-group-private">
+                                                {group.private ? "Private" : "Public"} group
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                            <div className="event-info-time-date-location">
+                                <div className="event-info-time-date-location-content">
+                                    <div className="clock-date-time"><i className="fa-regular fa-clock" />
+                                        <p className="event-details-text-indent"> {formattedDate(event.startDate)} to {formattedDate(event.endDate)}</p></div>
+                                    <div className="event-details-venue-location"><i className="fa-solid fa-location-dot" />
+                                        <p className="event-details-text-indent">  {event.Venue?.address}, {event.Venue?.city}, {event.Venue?.state}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="event-details-about-container">
+                        <div className="event-details-about-details">
+                            Details
+                        </div>
+                        <div className="event-details-about-details-text">{event.description}</div>
+                    </div>
+                </div>
+               
+            </div>
+
+            <div id="footer">
+                <div className="footer-info-container">
+                    <div className="footer-date">{shortFormattedDate(event.startDate)}</div>
+                    <div className="footer-event-name">{event.name}</div>
                 </div>
                 <div className="event-details-modals-container">
 
@@ -64,39 +120,6 @@ const EventDetails = () => {
                     </div>
                 </div>
             </div>
-            <div className="event-details-border"></div>
-            <div className="event-details-main-body">
-                <div className="event-details-image-card-container">
-                    <div className="event-details-image-container">
-                        {event.EventImages && (<img src={event.EventImages[0]?.url} className="event-details-image" />)}
-                    </div>
-                    <div className="event-details-group-info-event-info-container">
-                        <Link to={`/groups/${group.id}`} style={{ textDecoration: 'none' }}>
-                            <div className="event-details-info-card">
-                                <img src={group.GroupImages[0].url} alt="" className="event-details-group-image" />
-                                <div className="event-details-info-card-group-info">{group.name}
-                                    <div className="event-details-info-card-group-private">{group.private ? "Private" : "Public"} group
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                        <div className="event-info-time-date-location">
-                            <div className="clock-date-time"><i className="fa-regular fa-clock" />
-                                <p className="event-details-text-indent"> {formattedDate(event.startDate)} to {formattedDate(event.endDate)}</p></div>
-                            <div className="event-details-venue-location"><i className="fa-solid fa-location-dot" />
-                                <p className="event-details-text-indent">  {event.Venue?.address}, {event.Venue?.city}, {event.Venue?.state}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="event-details-about-container">
-                    <div className="event-details-about-details">
-                        Details
-                    </div>
-                    <div className="event-details-about-details-text">{event.description}</div>
-                </div>
-            </div>
-
         </div >
     )
 }

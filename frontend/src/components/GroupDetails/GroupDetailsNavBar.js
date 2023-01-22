@@ -17,14 +17,18 @@ const GroupDetailsNavBar = () => {
     return (
         <>
             <div className='group-details-center-divider'>
-                <NavLink exact to={`/groups/${groupId}`} activeClassName="active" style={{ textDecoration: 'none' }} className= "navlink-groups">
-                    About
-                </NavLink>
-                <NavLink to={`/groups/${groupId}/events`} activeClassName="active" style={{ textDecoration: 'none' }} className= "navlink-groups">
-                    Events
-                </NavLink>
+                <div className="group-details-navlink-about-container">
+                    {/* <NavLink exact to={`/groups/${groupId}`} activeClassName="active" style={{ textDecoration: 'none' }} className="navlink-about"> */}
+                        About
+                    {/* </NavLink> */}
+                </div>
+                {/* <div className="group-details-navlink-events-container">
+                    <NavLink to={`/groups/${groupId}/events`} activeClassName="active" style={{ textDecoration: 'none' }} className="navlink-events">
+                        Events
+                    </NavLink>
+                </div> */}
             </div>
-            <GroupDetailsAbout />
+            {/* <GroupDetailsAbout /> */}
         </>
     )
 }
