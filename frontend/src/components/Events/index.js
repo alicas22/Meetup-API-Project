@@ -16,7 +16,7 @@ const Events = () => {
   const eventsObj = useSelector(state => state.events.allEvents)
   const events = Object.values(eventsObj)
   const sessionUser = useSelector(state => state.session.user);
-  // const [isLoaded, setIsLoaded] = useState(false)
+
 
 
 
@@ -59,18 +59,12 @@ const Events = () => {
     return startDate
   }
 
-  // if (!events.length || !groups.length ||
-  //   events.length < 1 || groups.length < 1) return null;
-
   let eventHeaderText = "Find events near you";
-  let isLoggedIn = false
 
-  if (sessionUser) isLoggedIn = true
-  if (isLoggedIn === false) {
+  if (!sessionUser) {
     eventHeaderText = "Find events near you " + "(You must login to view details)"
   }
-
-
+  
   return groups && events && (
     <div className='events-container'>
 

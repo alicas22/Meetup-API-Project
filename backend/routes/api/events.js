@@ -10,18 +10,18 @@ const router = express.Router();
 
 const validateEvent = [
     check('venueId')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .custom(async value => {
             let venueExists = await Venue.findByPk(value)
             if (!venueExists) return Promise.reject()
         })
         .withMessage("Venue does not exist"),
     check('name')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isLength({ min: 5 })
         .withMessage("Name must be at least 5 characters"),
     check('type')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isIn(['Online', 'In person'])
         .withMessage(`Type must be 'Online' or 'In person'`),
     check('capacity')
@@ -31,7 +31,7 @@ const validateEvent = [
         .isFloat({ min: 0 })
         .withMessage("Price is invalid"),
     check('description')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isLength({ min: 10 })
         .withMessage("Description is required"),
     check('startDate')

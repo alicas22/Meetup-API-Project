@@ -10,6 +10,7 @@ import Events from './components/Events'
 import EventDetails from './components/EventDetails'
 import EventsGroupsNav from "./components/EventsGroupsNav";
 import Profile from "./components/Profile";
+import GroupDetailsAbout from "./components/GroupDetails/GroupDetailsAbout";
 import GroupDetailsEvents from './components/GroupDetails/GroupDetailsEvents'
 
 function App() {
@@ -29,11 +30,12 @@ function App() {
           </Route>
           <Route path='/groups/:groupId'>
             <GroupDetails />
+            <GroupDetailsAbout />
           </Route>
-          <Route path='/groups/:groupId/events'>
+          {/* <Route exact path='/groups/:groupId/events'>
             <GroupDetails />
             <GroupDetailsEvents />
-          </Route>
+          </Route> */}
           <Route path='/groups'>
             <EventsGroupsNav />
             <Groups />

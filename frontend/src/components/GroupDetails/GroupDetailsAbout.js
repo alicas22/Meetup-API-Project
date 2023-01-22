@@ -9,13 +9,15 @@ const GroupDetailsAbout = () => {
     const dispatch = useDispatch()
     const { groupId } = useParams()
     const group = useSelector((state => state.groups.singleGroup))
+    const sessionUser = useSelector(state => state.session.user);
 
 
     useEffect(() => {
         dispatch(getSingleGroupThunk(groupId))
     }, [dispatch])
 
-    return (
+
+    return sessionUser && (
         <>
             <div className='group-details-body'>
                 <div className='group-details-about-text'>

@@ -41,8 +41,8 @@
  .group-details-members-info,
  .group-details-organized-by{
     color:#212121;
-    /* line-height:2rem; */
-    
+
+
  }
 
  .group-details-name{
@@ -92,7 +92,7 @@
     align-items: center;
     padding-top:1.5rem;
     margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
     padding-bottom: 1.5rem;
     border-top: 1px solid rgb(238, 238, 238);
     border-bottom: 1px solid rgb(238, 238, 238);
@@ -109,4 +109,36 @@
 
 .group-details-about-text{
     text-align: center;
+}
+.group-details-center-divider{
+    /* color: white; */
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 1;
+    padding:0
+}
+
+
+.group-details-create-event,
+.group-details-update-group,
+.group-details-delete-group{
+    font-size: 1rem;
+
+    padding:0 5px;
+    min-width: auto
+}
+.group-details-navlink-events-container{
+    text-indent: 15px;
+}
+.group-details-body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color:rgb(238, 238, 238) ;
+    min-height: 60vh;
+}
+.group-details-about-text{
+    width:80%;
+    text-align:left;
+    text-indent: 1rem
 }

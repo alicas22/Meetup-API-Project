@@ -87,7 +87,7 @@ function CreateGroupModal() {
                     name='type'
                     onChange={e => setType(e.target.value)}
                     value={type}
-                    required
+                    // required
                 >
                     <option value='' disable selected>Select a group type...</option>
                     <option value='Online'>Online</option>
@@ -100,7 +100,7 @@ function CreateGroupModal() {
                     name='privated'
                     value={privated}
                     onChange={(e) => setPrivated(e.target.value)}
-                    required
+                    // required
                 >
                     <option value='' disable selected>Is Group Private?</option>
                     <option value={true}>Yes</option>
