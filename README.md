@@ -1,4 +1,5 @@
 # Meetup-API-Project
+<a name="readme-top"></a>
 
 Check out a live version of GitTogether here:
 [GitTogether][render-url]
@@ -37,26 +38,32 @@ You will be able to test the features without signing up by clicking on the "Dem
    ```sh
    git clone https://github.com/alicas22/Meetup-API-Project/
    ```
+   
 2. Naviagate to the /backend directory
 
 3. Install NPM packages
    ```sh
    npm install
    ```
+   
 4. Start the backend server
    ```sh
    npm start
    ```
+   
 5. In a new terminal, navigate to the /frontend directory
+
 
 6.Install NPM packages
    ```sh
    npm install
    ```
+   
 7. Start the backend server
    ```sh
    npm start
    ```
+   
 8. Navigate to http://localhost:3000/ to begin using the application.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
