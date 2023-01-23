@@ -20,7 +20,7 @@ const GroupDetailsAbout = () => {
     return sessionUser && (
         <>
             <div className='group-details-body'>
-                <div className='group-details-about-text'>
+                <div className='group-details-about-text' style = {{paddingTop:"2rem"}}>
                     {group.about}
                 </div>
             </div>
