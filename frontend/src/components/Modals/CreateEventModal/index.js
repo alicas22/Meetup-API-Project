@@ -142,7 +142,7 @@ function CreateEventModal() {
                         type="datetime-local"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
-
+                        required
                     />
                 </label>
                 <label>
@@ -151,6 +151,7 @@ function CreateEventModal() {
                         type="datetime-local"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
+                        required
                     />
                 </label>
                 <label>
