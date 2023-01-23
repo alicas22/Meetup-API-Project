@@ -20,14 +20,13 @@ GitTogether is a clone of MeetUp.com. It allows you to create groups to organize
 
 
 ### Features and Screenshots
-* Splash page
-You will be able to test the features without signing up by clicking on the "Demo User" button.
+* Splash page - You will be able to test the features without signing up by clicking on the "Demo User" button.
 ![Splash Page](https://github.com/alicas22/Meetup-API-Project/blob/main/GitTogether%20splashpage.png)
 
 * Groups Page - View groups / Add groups / Update groups / Delete groups / Add events
 ![Groups Page](https://github.com/alicas22/Meetup-API-Project/blob/main/GitTogether%20Groups.PNG)
 
-* View events / Delete events
+* Events Page - View events / Delete events
 ![Events Page](https://github.com/alicas22/Meetup-API-Project/blob/main/GitTogether%20Events.PNG)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -54,7 +53,7 @@ You will be able to test the features without signing up by clicking on the "Dem
 5. In a new terminal, navigate to the /frontend directory
 
 
-6.Install NPM packages
+6. Install NPM packages
    ```sh
    npm install
    ```
