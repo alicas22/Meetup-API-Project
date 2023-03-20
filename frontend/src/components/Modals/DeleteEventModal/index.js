@@ -16,12 +16,7 @@ function DeleteEventModal() {
     const sessionUser = useSelector(state => state.session.user);
     const history = useHistory()
 
-        console.log("eventId", eventId)
-        console.log("groupId", groupId)
-        console.log("sessionUser", sessionUser)
-        console.log("group", organizerId)
-
-
+       
 
     const handleSubmit = (e) => {
         e.preventDefault();
