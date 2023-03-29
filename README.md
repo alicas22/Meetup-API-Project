@@ -1,4 +1,4 @@
-# Meetup-API-Project
+# GitTogether
 <a name="readme-top"></a>
 
 Check out a live version of GitTogether here:
