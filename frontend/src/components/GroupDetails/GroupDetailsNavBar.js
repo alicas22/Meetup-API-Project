@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSingleGroupThunk } from "../../store/groups";
 import { NavLink } from "react-router-dom";
-import GroupDetailsAbout from './GroupDetailsAbout'
 import './GroupDetails.css'
 
 
@@ -18,17 +17,17 @@ const GroupDetailsNavBar = () => {
         <>
             <div className='group-details-center-divider'>
                 <div className="group-details-navlink-about-container">
-                    {/* <NavLink exact to={`/groups/${groupId}`} activeClassName="active" style={{ textDecoration: 'none' }} className="navlink-about"> */}
+                    <NavLink exact to={`/groups/${groupId}`} className="group-details-nav-option" activeClassName="active" style={{ textDecoration: 'none' }}>
                         About
-                    {/* </NavLink> */}
+                    </NavLink>
                 </div>
-                {/* <div className="group-details-navlink-events-container">
-                    <NavLink to={`/groups/${groupId}/events`} activeClassName="active" style={{ textDecoration: 'none' }} className="navlink-events">
+                <div className="group-details-navlink-events-container">
+                    <NavLink to={`/groups/${groupId}/events`} className="group-details-nav-option" activeClassName="active" style={{ textDecoration: 'none' }}>
                         Events
                     </NavLink>
-                </div> */}
+                </div>
             </div>
-            {/* <GroupDetailsAbout /> */}
+
         </>
     )
 }

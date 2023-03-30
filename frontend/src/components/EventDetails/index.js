@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useParams } from "react-router"
 import { getSingleEventThunk } from "../../store/events"
+import { getEventAttendees } from "../../store/attendees"
 import { getGroups, getSingleGroupThunk } from "../../store/groups"
 import DeleteEventModal from "../Modals/DeleteEventModal"
 import { Link } from 'react-router-dom'
 import './EventDetails.css'
 import OpenModalButton from '../Modals/OpenModalButton/index.js';
 import formatDate from '../../utils/formatDate.js';
+import MapContainer from '../Maps/index'
 
 const EventDetails = () => {
     const dispatch = useDispatch()
@@ -15,17 +17,24 @@ const EventDetails = () => {
     const event = useSelector(state => state.events.singleEvent)
     const group = useSelector(state => state.groups.singleGroup)
     const sessionUser = useSelector(state => state.session.user);
-
+    const attendeesObj = useSelector(state => state.attendees.attendees)
+    
     const asyncEventGet = async () => {
         const singleEvent = await dispatch(getSingleEventThunk(eventId))
         if (singleEvent) {
-            dispatch(getSingleGroupThunk(singleEvent.groupId))
+            await dispatch(getSingleGroupThunk(singleEvent.groupId))
         }
+
     }
 
     useEffect(() => {
         asyncEventGet()
+        dispatch(getEventAttendees(eventId))
     }, [dispatch, sessionUser])
+
+    if (!attendeesObj) return null
+
+    const attendeesArr = Object.values(attendeesObj)
 
 
     const formattedDate = (eventDate) => {
@@ -96,13 +105,35 @@ const EventDetails = () => {
                         </div>
                     </div>
                     <div className="event-details-about-container">
-                        <div className="event-details-about-details">
-                            Details
+                        <div className="event-details-about-header-text-container">
+                            <div className="event-details-attendees">
+                                <div className="event-details-attendee-header event-details-about-details">
+                                    Attendees
+                                </div>
+                                <div className="event-details-attendee-card-container">
+                                    {attendeesArr.map(attendee => (
+                                        <div className="event-details-attendee-card">
+                                            <i class="fa-solid fa-user event-details-user-icon"></i>
+                                            <div className="event-details-attendee-names">
+                                                {`${attendee.firstName} ${attendee.lastName}`}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="event-details-about-details">
+                                Details
+                            </div>
+                            <div className="event-details-about-details-map-container">
+                                <div className="event-details-about-details-text">{event.description}</div>
+                                <div className="event-details-google-map">
+                                    <MapContainer center="5828 crescent ave, buena park, ca, 90620" />
+                                </div>
+                            </div>
                         </div>
-                        <div className="event-details-about-details-text">{event.description}</div>
                     </div>
                 </div>
-               
+
             </div>
 
             <div id="footer">
@@ -111,13 +142,14 @@ const EventDetails = () => {
                     <div className="footer-event-name">{event.name}</div>
                 </div>
                 <div className="event-details-modals-container">
-
-                    <div className='event-detail-delete-modal'>
-                        <OpenModalButton
-                            buttonText="Delete Event"
-                            modalComponent={<DeleteEventModal />}
-                        />
-                    </div>
+                    {group.organizerId === sessionUser.id && (
+                        <div className='event-detail-delete-modal'>
+                            <OpenModalButton
+                                buttonText="Delete Event"
+                                modalComponent={<DeleteEventModal />}
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
         </div >

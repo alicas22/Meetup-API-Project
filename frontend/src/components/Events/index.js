@@ -55,7 +55,7 @@ const Events = () => {
 
   const formatStartDate = (eventDate) => {
     const date = formatDate(eventDate)
-    const startDate = `${date.shortDayName}, ${date.shortMonth} ${date.time}`
+    const startDate = `${date.shortDayName}, ${date.shortMonth} ${date.day} ${date.year} ${date.time}`
     return startDate
   }
 
@@ -64,7 +64,7 @@ const Events = () => {
   if (!sessionUser) {
     eventHeaderText = "Find events near you " + "(You must login to view details)"
   }
-  
+
   return groups && events && (
     <div className='events-container'>
 

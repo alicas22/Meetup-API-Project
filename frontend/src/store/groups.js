@@ -6,7 +6,7 @@ const ADD_GROUP = "groups/ADD_GROUP";
 const UPDATE_GROUP = "groups/UPDATE_GROUP";
 const DELETE_GROUP = "groups/DELETE_GROUP";
 const ADD_GROUP_IMAGE = "groups/ADD_GROUP_IMAGE";
-const GET_SINGLE_GROUP = "groups/GET_SINGLE_GROUP"
+const GET_SINGLE_GROUP = "groups/GET_SINGLE_GROUP";
 
 
 //Action Creators
@@ -16,6 +16,7 @@ export const loadGroups = (groups) => {
     payload: groups,
   };
 };
+
 
 
 export const addGroup = (newGroup, newSingleGroup) => {
@@ -91,6 +92,7 @@ export const getGroups = () => async (dispatch) => {
     return data
   }
 };
+
 
 
 export const createGroup = (group, image, sessionUser) => async (dispatch) => {
@@ -172,6 +174,8 @@ export const groupsReducer = (state = initialState, action) => {
       return newState;
     }
 
+
+
     case ADD_GROUP: {
       const newState = { ...state, allGroups: { ...state.allGroups }, singleGroup: {} };
       newState.allGroups[action.payload.newGroup.id] = action.payload.newGroup;
@@ -189,11 +193,7 @@ export const groupsReducer = (state = initialState, action) => {
     case DELETE_GROUP: {
       const newState = { ...state, allGroups: { ...state.allGroups } };
       delete newState.allGroups[action.payload];
-      // const newState = {...state}
-      // const copyState = { ...newState.allGroups}
-      // delete copyState[action.groupId]
-      // newState.allGroups = copyState;
-      // newState.singleGroup = {}
+
       return newState;
     }
     case ADD_GROUP_IMAGE: {

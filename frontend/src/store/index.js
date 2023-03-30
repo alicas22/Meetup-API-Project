@@ -2,13 +2,20 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import groupsReducer from "./groups";
 import eventsReducer from "./events";
-
 import sessionReducer from './session';
+import mapsReducer from "./maps";
+import attendeesReducer from "./attendees";
+import membersReducer from "./members";
+import searchReducer from "./search";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   groups: groupsReducer,
-  events: eventsReducer
+  events: eventsReducer,
+  maps: mapsReducer,
+  attendees: attendeesReducer,
+  members:membersReducer,
+  search: searchReducer
 });
 
 

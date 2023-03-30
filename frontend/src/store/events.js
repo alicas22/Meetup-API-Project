@@ -8,6 +8,9 @@ const DELETE_EVENT = "events/DELETE_EVENT";
 const ADD_EVENT_IMAGE = "events/ADD_EVENT_IMAGE";
 const GET_SINGLE_EVENT = "events/GET_SINGLE_EVENT"
 
+const LOAD_GROUPS_EVENTS = "events/LOAD_GROUPS_EVENTS"
+
+
 //Action Creators
 export const loadEvents = (events) => {
   return {
@@ -15,6 +18,15 @@ export const loadEvents = (events) => {
     payload: events,
   };
 };
+
+export const loadGroupsEvents = (events) => {
+  return {
+    type: LOAD_GROUPS_EVENTS,
+    payload: events,
+  };
+};
+
+
 
 
 export const addEvent = (newEvent, newSingleEvent) => {
@@ -40,12 +52,7 @@ export const remove = (eventId) => {
   };
 };
 
-// export const addEventImage = (image, eventId) =>{
-//   return {
-//     type: ADD_EVENT_IMAGE,
-//     payload: {image, eventId}
-//   }
-// }
+
 
 export const getSingleEvent = (event) =>{
   return{
@@ -66,20 +73,6 @@ export const getSingleEventThunk = (eventId) => async (dispatch) =>{
   }
 }
 
-// export const addEventImageThunk = (image, eventId) => async(dispatch) =>{
-//   const response = await csrfFetch(`/api/events/${eventId}/images`,{
-//     method: 'POST',
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(image),
-//   })
-//   if (response.ok){
-//     const data = await response.json();
-//     dispatch(addEventImage(data))
-//     return data;
-//   }
-// }
 
 export const getEvents = () => async (dispatch) => {
   const response = await csrfFetch("/api/events");
@@ -89,6 +82,17 @@ export const getEvents = () => async (dispatch) => {
     dispatch(loadEvents(data));
   }
 };
+
+export const getGroupsEvents = (groupId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/groups/${groupId}/events`);
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(loadGroupsEvents(data));
+    return data
+  }
+};
+
 
 
 export const createEvent = (event, image, sessionUser,groupId) => async (dispatch) => {
@@ -173,6 +177,27 @@ export const eventsReducer = (state = initialState, action) => {
       // });
       // return newState;
     }
+
+    case LOAD_GROUPS_EVENTS: {
+      const eventsObj = {};
+      action.payload.Events.forEach(event => {
+          eventsObj[event.id] = event;
+      });
+      const newState = { ...state };
+      newState.allEvents = { ...eventsObj };
+      return newState;
+    }
+
+    // case LOAD_EVENT_ATTENDEES: {
+    //   const newState = { ...state };
+    //   const attendeesObj = {};
+    //   action.payload.Attendees.forEach(attendee => {
+    //     attendeesObj[attendee.id] = attendee;
+    //   });
+    //   newState.singleEvent.Attendees = attendeesObj
+
+    //   return newState;
+    // }
 
     case ADD_EVENT: {
       const newState = { ...state, allEvents: { ...state.allEvents }, singleEvent: {} };

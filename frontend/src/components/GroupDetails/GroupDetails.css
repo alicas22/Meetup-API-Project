@@ -104,11 +104,14 @@
 
 .group-details-body{
     height:100%;
-    width: 100%;
+    width: 1000%;
 }
 
 .group-details-about-text{
     text-align: center;
+    margin: 0 1rem
+
+
 }
 .group-details-center-divider{
     /* color: white; */
@@ -140,5 +143,85 @@
 .group-details-about-text{
     width:80%;
     text-align:left;
-    text-indent: 1rem
+    text-indent: 1rem;
+    white-space: pre-wrap
+
+}
+
+.group-details-nav-option{
+    border-bottom: 4px solid transparent;
+}
+
+.group-details-events-body{
+    min-height: 300px;
+    background-color:rgb(238, 238, 238) ;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    padding-top:1rem;
+}
+
+.group-details-events-card{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    height:fit-content;
+    border-radius: 8px;
+    padding:1rem
+}
+
+.group-details-events-date-name-container{
+    padding-left:1rem;
+
+}
+
+.group-detials-events-card-date{
+    color: #877457;
+    font-weight: 500;
+}
+
+.group-details-events-card-name{
+    font-size:18px;
+    font-weight:bold;
+    color:black
+}
+
+.group-details-events-card-attendees{
+    font-size:12px;
+    padding-top:1rem;
+    color:black
+}
+
+.group-details-members-container{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    padding:1rem;
+    margin: 1rem;
+    height:fit-content;
+    border:1px solid black;
+    border-radius: 8px;
+    background-color: white;
+}
+.group-details-members-header{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.group-details-attendee-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:.25rem;
+    margin: .25rem;
+    border-radius: 8px;
+    /* background-color: white; */
+    /* border:1px solid black; */
+
+}
+
+.group-details-user-icon{
+    padding-right: .5rem;
 }
