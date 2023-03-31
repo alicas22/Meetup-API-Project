@@ -115,6 +115,9 @@
 
 .nav-bar-search-text-field {
     padding-right: 2.5rem;
+    /* min-width: 300px; */
+    width: 35vw
+
     /* make room for the button */
 }
 

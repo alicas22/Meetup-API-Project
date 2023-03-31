@@ -1,0 +1,12 @@
+.search-results-header {
+    display: flex;
+    width: 70%;
+    margin: auto;
+    margin-top: 3rem;
+}
+
+.search-title,
+.group-results-container,
+.events-container.event-results-container {
+    min-height: 400px;
+}

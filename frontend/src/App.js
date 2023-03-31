@@ -13,7 +13,10 @@ import Profile from "./components/Profile";
 import GroupDetailsAbout from "./components/GroupDetails/GroupDetailsAbout";
 import GroupDetailsEvents from './components/GroupDetails/GroupDetailsEvents'
 import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults"
 import PageNotFound from "./components/PageNotFound";
+import EventResults from "./components/SearchResults/EventResults.js";
+import GroupResults from "./components/SearchResults/GroupResults.js"
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +54,17 @@ function App() {
           </Route>
           <Route path='/profile'>
             <Profile />
+          </Route>
+          <Route  path='/search/groups'>
+            <SearchResults />
+            <GroupResults />
+          </Route>
+          <Route path='/search/events'>
+            <SearchResults />
+            <EventResults />
+          </Route>
+          <Route path='/search'>
+            <SearchResults />
           </Route>
           <Route path="*">
             <PageNotFound />

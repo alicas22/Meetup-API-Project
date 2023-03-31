@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const CREATE_SEARCH = 'search/CREATE_SEARCH';
 const CLEAN_SEARCH = 'search/CLEAN_SEARCH';
 
@@ -6,6 +8,7 @@ const createSearch = (results) => ({
   results,
 });
 
+
 export const cleanUpSearchAction = () => {
   return {
     type: CLEAN_SEARCH,
@@ -13,10 +16,8 @@ export const cleanUpSearchAction = () => {
 };
 
 export const thunkCreateSearch = (query) => async (dispatch) => {
-  const response = await fetch(`/api/search?q=${query}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(query),
+
+  const response = await csrfFetch(`/api/search?q=${query}`, {
   });
 
   if (response.ok) {
@@ -27,6 +28,10 @@ export const thunkCreateSearch = (query) => async (dispatch) => {
 };
 
 const normalize = (arr) => {
+  if (arr.length === 0) {
+    return {};
+  }
+
   const resObj = {};
   arr.forEach((ele) => {
     resObj[ele.id] = ele;
@@ -48,12 +53,11 @@ const searchReducer = (state = initialState, action) => {
         newState = { ...state };
         newState.Groups = {};
         newState.Events = {};
-        action.results.forEach((result) => {
-          if (result.type === 'Group') {
-            newState.Groups[result.id] = result;
-          } else if (result.type === 'Event') {
-            newState.Events[result.id] = result;
-          }
+        action.results.groups.forEach((result) => {
+          newState.Groups[result.id] = result;
+        });
+        action.results.events.forEach((result) => {
+          newState.Events[result.id] = result;
         });
         return newState;
       } else {
