@@ -18,7 +18,7 @@ const EventDetails = () => {
     const group = useSelector(state => state.groups.singleGroup)
     const sessionUser = useSelector(state => state.session.user);
     const attendeesObj = useSelector(state => state.attendees.attendees)
-    
+
     const asyncEventGet = async () => {
         const singleEvent = await dispatch(getSingleEventThunk(eventId))
         if (singleEvent) {
@@ -127,7 +127,7 @@ const EventDetails = () => {
                             <div className="event-details-about-details-map-container">
                                 <div className="event-details-about-details-text">{event.description}</div>
                                 <div className="event-details-google-map">
-                                    <MapContainer center="5828 crescent ave, buena park, ca, 90620" />
+                                    <MapContainer center={event.Venue?.address} />
                                 </div>
                             </div>
                         </div>

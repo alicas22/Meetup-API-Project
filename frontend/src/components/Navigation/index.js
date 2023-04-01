@@ -19,7 +19,7 @@ function Navigation({ isLoaded }) {
   const [query, setQuery] = useState('');
   const history = useHistory()
 
-  const credential = 'JohnSmith'
+  const credential = 'Demo-lition'
   const password = 'password'
 
   const handleSubmit = (e) => {

@@ -11,7 +11,7 @@ const router = express.Router();
 const validateCreation = [
     check('name')
         // .exists({ checkFalsy: true })
-        .isLength({min:2, max:60})
+        .isLength({ min: 2, max: 60 })
         .withMessage('Name must be between 2 and 60 characters'),
     check('about')
         .exists({ checkFalsy: true })
@@ -377,7 +377,7 @@ router.get('/:groupId/events', async (req, res, next) => {
         for (let i = 0; i < events.length; i++) {
             let event = events[i]
             const eventId = event.id
-            const numAttending = await Attendance.count({ where: { eventId } })
+            const numAttending = await Attendance.count({ where: { eventId }, status: 'attending' })
             const previewImage = await EventImage.findOne({ where: { eventId, preview: true } })
             event = event.toJSON()
             event.numAttending = numAttending;
@@ -385,6 +385,7 @@ router.get('/:groupId/events', async (req, res, next) => {
             else event.previewImage = "Preview not available"
             allEvents.push(event)
         }
+
         return res.json({ Events: allEvents })
     } else {
         err.title = "Can't find Group"
@@ -431,7 +432,7 @@ router.post('/:groupId/events', requireAuth, validateEvent, async (req, res, nex
 
     const group = await Group.findByPk(groupId)
     if (group) {
-        const cohost = await Membership.findOne({ where: { groupId: group.id, status: 'co-host' } })
+        const cohost = await Membership.findOne({ where: { groupId: group.id, [Op.or]: [{ status: 'co-host' }, { status: 'member' }] } })
         if (group.organizerId != user.id) { //check if organizer
             err.title = "Not authorized"
             err.status = 401
@@ -503,7 +504,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     for (let i = 0; i < result.length; i++) {
         let group = result[i]
         const groupId = group.id
-        const numMembers = await Membership.count({ where: { groupId } })
+        const numMembers = await Membership.count({ where: { groupId, [Op.or]: [{ status: 'co-host' }, { status: 'member' }] } })
         const previewImage = await GroupImage.findOne({ where: { groupId, preview: true } })
 
         group.numMembers = numMembers;
@@ -538,7 +539,7 @@ router.get('/:groupId', requireAuth, async (req, res, next) => {
         ]
     })
     if (group) {
-        const numMembers = await Membership.count({ where: { groupId } })
+        const numMembers = await Membership.count({ where: { groupId, [Op.or]: [{ status: 'co-host' }, { status: 'member' }] } })
         group.toJSON()
         group.numMembers = numMembers
 
@@ -638,7 +639,7 @@ router.get('/', async (req, res, next) => {
     for (let i = 0; i < groups.length; i++) {
         let group = groups[i]
         const groupId = group.id
-        const numMembers = await Membership.count({ where: { groupId } })
+        const numMembers = await Membership.count({ where: { groupId, [Op.or]: [{ status: 'co-host' }, { status: 'member' }] } })
         const previewImage = await GroupImage.findOne({ where: { groupId, preview: true } })
         group = group.toJSON()
         group.numMembers = numMembers;
