@@ -13,7 +13,7 @@ function EventsGroupsNav() {
                 <NavLink to='/events' activeClassName="active" style={{ textDecoration: 'none'}} className="navlink-events">Events</NavLink>
             </div>
             <div className="EventsGroupsNav-groups">
-                <NavLink to='/groups' activeClassName="active" style={{ textDecoration: 'none' }} className= "navlink-groups">Groups</NavLink>
+                <NavLink to='/groups' activeClassName="active" style={{ textDecoration: 'none'}} className= "navlink-groups">Groups</NavLink>
             </div>
         </div>
     )

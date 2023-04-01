@@ -1,0 +1,57 @@
+.main-footer-container {
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgba(34, 34, 34, .15);
+    color: white;
+    font-size: 14px;
+    line-height: 1;
+    padding-top: 45px;
+    background-color: #353e48;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.tech-and-about-container {
+    /* border: pink 3px solid; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 60%;
+    margin-bottom: 30px;
+}
+
+.first-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.second-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 39px;
+}
+
+.third-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.first-column :hover {
+    text-decoration: underline;
+}
+
+.second-column :hover {
+    text-decoration: underline;
+}
+
+.third-column :hover {
+    text-decoration: underline;
+}

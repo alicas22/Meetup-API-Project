@@ -79,9 +79,9 @@ function CreateEventModal() {
                     value={venueId}
                 >
                     <option value='' disable selected>Select an venue...</option>
-                    <option value='1'>1: 123 Make Believe Way</option>
-                    <option value='2'>2: 54321 This Aint Real St</option>
-                    <option value='3'>3: 21 Whos Asking Blvd</option>
+                    <option value='1'>1: 24056 Malibu Rd, Malibu, CA 90265</option>
+                    <option value='2'>2: 1313 Disneyland Dr, Anaheim, CA 92802</option>
+                    <option value='3'>3: 1 Central Park S, New York, NY 10019 </option>
                 </select>
                 <label>
                     Name

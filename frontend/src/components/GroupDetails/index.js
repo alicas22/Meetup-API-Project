@@ -23,7 +23,7 @@ const GroupDetails = () => {
     if (group === undefined) return null
 
     if (!sessionUser) return (
-        <div style={{textAlign:'center'}}>
+        <div style={{ textAlign: 'center' }}>
             <h1>You must login to view Details</h1>
         </div>
     )
@@ -45,25 +45,28 @@ const GroupDetails = () => {
                         <span className="group-details-indent3">Organized by {group.Organizer?.firstName} {group.Organizer?.lastName}</span>
                     </div>
                     <div className='group-details-crud'>
-                        <div className='group-details-create-event'>
-
-                            <OpenModalButton
-                                buttonText="Create Event"
-                                modalComponent={<CreateEventModal />}
-                            />
-                        </div>
-                        <div className='group-details-update-group'>
-                            <OpenModalButton
-                                buttonText="Update Group"
-                                modalComponent={<UpdateGroupModal prop={group} />}
-                            />
-                        </div>
-                        <div className='group-details-delete-group'>
-                            <OpenModalButton
-                                buttonText="Delete Group"
-                                modalComponent={<DeleteGroupModal />}
-                            />
-                        </div>
+                        {group.organizerId === sessionUser.id && (
+                            <>
+                                <div className='group-details-create-event'>
+                                    <OpenModalButton
+                                        buttonText="Create Event"
+                                        modalComponent={<CreateEventModal />}
+                                    />
+                                </div>
+                                <div className='group-details-update-group'>
+                                    <OpenModalButton
+                                        buttonText="Update Group"
+                                        modalComponent={<UpdateGroupModal prop={group} />}
+                                    />
+                                </div>
+                                <div className='group-details-delete-group'>
+                                    <OpenModalButton
+                                        buttonText="Delete Group"
+                                        modalComponent={<DeleteGroupModal />}
+                                    />
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

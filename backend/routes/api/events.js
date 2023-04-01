@@ -268,7 +268,7 @@ router.get('/:eventId/attendees', restoreUser, async (req, res, next) => {
         if (group.organizerId === user.id || areYouCohost) {
             attendees = await Attendance.findAll({ where: { eventId } })
         } else {
-            attendees = await Attendance.findAll({ where: { eventId: eventId, status: { [Op.or]: ['attending', 'not attending'] } } })
+            attendees = await Attendance.findAll({ where: { eventId: eventId, status: 'attending' } })
         }
 
         attendees.forEach(attendance => {
@@ -321,9 +321,10 @@ router.get('/:eventId', async (req, res, next) => {
             }
         ]
     });
-
+    console.log(eventId)
     if (event) {
-        const numAttending = await Attendance.count({ where: { eventId } })
+        const numAttending = await Attendance.count({ where: { eventId, status: 'attending' } })
+
         event = event.toJSON();
         event.numAttending = numAttending
         return res.json(event)
@@ -455,10 +456,11 @@ router.get('/', validateQuery, async (req, res, next) => {
     for (let i = 0; i < events.length; i++) {
         let event = events[i]
         const eventId = event.id
-        const numAttending = await Attendance.count({ where: { eventId } })
+        const numAttending = await Attendance.count({ where: { eventId , status: 'attending'} })
         const previewImage = await EventImage.findOne({ where: { eventId, preview: true } })
         event = event.toJSON()
         event.numAttending = numAttending;
+
         if (previewImage) event.previewImage = previewImage.url
         else event.previewImage = "Preview not available"
         allEvents.push(event)

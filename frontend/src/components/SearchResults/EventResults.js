@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Link, Route } from 'react-router-dom';
-import { getEvents } from '../../store/events.js';
 import { getGroups } from '../../store/groups.js';
-import { useModal } from "../../context/Modal";
 import OpenModalButton from '../Modals/OpenModalButton';
-import formatDate from '../../utils/formatDate.js';
+import formatDate from '../../utils/formatDate'
 
-import './Events.css'
+import './SearchResults.css'
 
-const Events = () => {
+const EventResults = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
-  const groupsObj = useSelector(state => state.groups.allGroups)
-  const groups = Object.values(groupsObj)
-  const eventsObj = useSelector(state => state.events.allEvents)
-  const events = Object.values(eventsObj)
-  const sessionUser = useSelector(state => state.session.user);
-
-
-
 
   useEffect(() => {
     dispatch(getGroups())
-    dispatch(getEvents())
   }, [dispatch])
+
+  const groupsObj = useSelector(state => state.groups.allGroups)
+  const groups = Object.values(groupsObj)
+  const sessionUser = useSelector(state => state.session.user);
+  const eventResultsObj = useSelector((state) => state.search.Events)
+  if (!eventResultsObj) return null
+
+  const eventResultsArr = Object.values(eventResultsObj)
+  if (!eventResultsArr.length) return <h1 className='search-title'></h1>
 
   let groupName
   let groupCity
@@ -59,18 +59,17 @@ const Events = () => {
     return startDate
   }
 
-  let eventHeaderText = "Find events near you";
+  let eventHeaderText = "Find events";
 
   if (!sessionUser) {
-    eventHeaderText = "Find events near you " + "(You must login to view details)"
+    eventHeaderText = "Find events " + "(You must login to view details)"
   }
 
-  return groups && events && (
-    <div className='events-container'>
-
+  return (
+    <div className='events-container event-results-container'>
       <h4 className='events-header'>{eventHeaderText}</h4>
       <div className='events-list'>
-        {events.map((event) => (
+        {eventResultsArr.map((event) => (
           <Link to={`/events/${event.id}`} style={{ textDecoration: "none" }} key={event.id} >
             <div className="single-event-container" >
               <img src={event.previewImage} alt={event.name} className="events-preview-image"></img>
@@ -88,4 +87,4 @@ const Events = () => {
   )
 };
 
-export default Events;
+export default EventResults;

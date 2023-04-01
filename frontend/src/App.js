@@ -12,6 +12,11 @@ import EventsGroupsNav from "./components/EventsGroupsNav";
 import Profile from "./components/Profile";
 import GroupDetailsAbout from "./components/GroupDetails/GroupDetailsAbout";
 import GroupDetailsEvents from './components/GroupDetails/GroupDetailsEvents'
+import Footer from "./components/Footer";
+import SearchResults from "./components/SearchResults"
+import PageNotFound from "./components/PageNotFound";
+import EventResults from "./components/SearchResults/EventResults.js";
+import GroupResults from "./components/SearchResults/GroupResults.js"
 
 function App() {
   const dispatch = useDispatch();
@@ -28,14 +33,14 @@ function App() {
           <Route exact path='/'>
             <SplashPage />
           </Route>
-          <Route path='/groups/:groupId'>
+          <Route exact path='/groups/:groupId'>
             <GroupDetails />
             <GroupDetailsAbout />
           </Route>
-          {/* <Route exact path='/groups/:groupId/events'>
+          <Route exact path='/groups/:groupId/events'>
             <GroupDetails />
             <GroupDetailsEvents />
-          </Route> */}
+          </Route>
           <Route path='/groups'>
             <EventsGroupsNav />
             <Groups />
@@ -50,8 +55,23 @@ function App() {
           <Route path='/profile'>
             <Profile />
           </Route>
+          <Route  path='/search/groups'>
+            <SearchResults />
+            <GroupResults />
+          </Route>
+          <Route path='/search/events'>
+            <SearchResults />
+            <EventResults />
+          </Route>
+          <Route path='/search'>
+            <SearchResults />
+          </Route>
+          <Route path="*">
+            <PageNotFound />
+          </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }
