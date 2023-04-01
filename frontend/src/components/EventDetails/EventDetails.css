@@ -21,8 +21,6 @@
 
 .event-details-header-container {
     width: 80%;
-
-
 }
 
 .event-details-name {
@@ -55,6 +53,7 @@
 
 .event-details-under-border {
     width: 100%;
+    height: 100%;
     background-color: rgb(242, 242, 242);
     display: flex;
     flex-direction: row;
@@ -74,6 +73,7 @@
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
+    justify-content: space-between;
 }
 
 .event-details-image {
@@ -94,16 +94,16 @@
 .event-details-group-info-event-info-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     width: 60%;
     /* background-color: yellow; */
     margin-left: 10px;
-    padding-left: 1rem;
+    /* padding-left: 1rem;
     padding-right: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1rem; */
     max-width: 40%;
-    position:sticky
+    position: sticky
 }
 
 .event-details-group-link {
@@ -131,11 +131,12 @@
     margin-right: 10px
 }
 
-.event-details-info-card-group-info{
+.event-details-info-card-group-info {
     font-weight: bold;
     font-size: 16px;
 }
-.event-details-info-card-group-private{
+
+.event-details-info-card-group-private {
     font-weight: normal;
     font-size: 14px;
 }
@@ -145,12 +146,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    /* padding: 1rem; */
     margin: 20px;
+    border: 0;
     background-color: white;
     border-radius: 1rem;
     padding: 20px;
-    border-radius: 1rem;
     min-width: 250px;
     max-width: 500px;
     font-size: 14px;
@@ -174,6 +175,40 @@
 }
 
 /*details start here*/
+.event-details-attendee-card-container {
+    display: flex;
+}
+
+.event-details-attendee-card {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    margin: 1rem;
+    margin-left: 0;
+
+    border-radius: 8px;
+    background-color: white;
+}
+
+.event-details-attendee-header.event-details-about-details {
+    margin-top: 2rem;
+    padding-bottom: 0;
+}
+
+.event-details-user-icon {
+    padding-right: 1rem;
+}
+
+.event-details-about-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.event-details-about-header-text-container {
+    /* width: 50% */
+}
 
 .event-details-about-details {
     font-size: 1.3rem;
@@ -181,9 +216,23 @@
     padding-bottom: 1rem;
 }
 
-/* .event-details-bottom-filler{
-    height: 200px;
-} */
+.event-details-about-details-text {
+    /* text-indent: 1rem; */
+    text-align: left;
+    white-space: pre-wrap
+}
+
+.event-details-about-details-map-container{
+    display: flex;
+}
+.event-details-google-map {
+    display: flex;
+    justify-content: center;
+    padding-left: 3rem;
+    padding-right: 1rem;
+    /* align-items: center; */
+}
+
 
 #footer {
     display: flex;
@@ -193,9 +242,7 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-
     background-color: white;
-
 }
 
 .footer-info-container {
@@ -233,87 +280,3 @@
     margin: 5px;
     text-align: center;
 }
-
-/*backup formatting
-/* .event-details-info-card {
-    display: flex;
-    width: auto;
-    flex-direction: row;
-    justify-content: start;
-    height: 50%;
-    border: 1px solid black;
-    background-color: white;
-
-} */
-/* .event-details-group-info-event-info-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-left: 2rem;
-        width: 100%
-    }
-
-    .event-details-group-link {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 60%;
-        border-radius: 1rem;
-        background-color: white;
-        padding: 0;
-        border: 0;
-        margin: 0;
-    }
-
-
-
-    .event-details-info-card-content {
-        padding: 10px;
-        display: flex;
-        flex-direction: row;
-
-    }
-
-    .event-details-group-image {
-        width: 100px;
-        height: 100px;
-        border-radius: .5rem;
-        object-fit: cover;
-    }
-
-
-    .event-details-info-card-group-info {
-        width: auto;
-        margin-left: 1rem;
-        font-weight: bold;
-        color: black
-
-    }
-
-    .event-details-info-card-group-private {
-        font-weight: 100;
-        font-size: 15px;
-        color: grey
-    }
-
-    .event-info-time-date-location {
-        background-color: white;
-        border-radius: 1rem;
-        margin-top: 10px;
-        width:auto;
-        max-width:60%
-    }
-    .event-info-time-date-location-content {
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-
-    }
-
-
-    .clock-date-time,
-    .event-details-venue-location {
-        display: flex;
-        align-items: center;
-    } */

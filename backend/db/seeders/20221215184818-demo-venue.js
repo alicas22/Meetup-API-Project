@@ -10,27 +10,27 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         groupId: 1,
-        address: "123 Make Believe Way",
-        city: "Imaginationland",
+        address: "24056 Malibu Rd",
+        city: "Malibu",
         state: "CA",
-        lat: 36.7783,
-        lng: 119.4179,
+        lat: 34.0317,
+        lng: -118.6996,
       },
       {
         groupId: 2,
-        address: "54321 This Aint Real St",
-        city: "Faketon",
-        state: "LA",
-        lat: 30.9843,
-        lng: 91.9623,
+        address: "1313 Disneyland Dr",
+        city: "Anaheim",
+        state: "CA",
+        lat: 33.8123,
+        lng: -117.9190,
       },
       {
         groupId: 3,
-        address: "21 Whos Asking Blvd",
-        city: "Snitchfree",
+        address: "1 Central Park S",
+        city: "New York",
         state: "NY",
-        lat: 40.7128,
-        lng: 74.0060,
+        lat: 40.7648,
+        lng: -73.9745,
       }
     ], {});
   },
@@ -39,7 +39,7 @@ module.exports = {
     options.tableName = 'Venues';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      city: { [Op.in]: ['Imaginationland', 'Faketon', 'Snitchfree'] }
+      city: { [Op.in]: ['Malibu', 'Anaheim', 'New York'] }
     }, {});
   }
 };
