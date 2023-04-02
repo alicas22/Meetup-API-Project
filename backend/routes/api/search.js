@@ -7,10 +7,11 @@ const { Group, Event, Membership, GroupImage, EventImage, Attendance } = require
 router.get('/', async (req, res) => {
   const query = req.query.q;
 
+  //postgres version
   const groupResults = await Group.findAll({
     where: {
       name: {
-        [Op.like]: Sequelize.fn('LOWER', `%${query}%`),
+        [Op.iLike]: `%${query}%`,
       },
     },
   });
@@ -18,10 +19,27 @@ router.get('/', async (req, res) => {
   const eventResults = await Event.findAll({
     where: {
       name: {
-        [Op.like]: Sequelize.fn('LOWER', `%${query}%`),
+        [Op.iLike]: `%${query}%`,
       },
     },
   });
+
+  //sequelize version
+  // const groupResults = await Group.findAll({
+  //   where: {
+  //     name: {
+  //       [Op.like]: Sequelize.fn('LOWER', `%${query}%`),
+  //     },
+  //   },
+  // });
+
+  // const eventResults = await Event.findAll({
+  //   where: {
+  //     name: {
+  //       [Op.like]: Sequelize.fn('LOWER', `%${query}%`),
+  //     },
+  //   },
+  // });
 
   // calculate numMembers and previewImage for groups
   const allGroups = [];
